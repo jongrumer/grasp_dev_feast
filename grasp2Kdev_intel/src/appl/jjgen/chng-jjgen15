@@ -1,0 +1,59 @@
+The following are the original statements to be replaced in JJGEN15,
+*****************************************************************
+      if (.NOT.advexp)
+     :   call Matbin(org,lock,closed,varmax,skal,second,anel,
+     :                      par,low,nmax,lim,dubbel,minJ,maxJ) 
+      if (second) then
+         call Fivelines(org,lock,closed,.FALSE.,posn,posl)
+         call Blanda(org,varmax,lock,minJ,maxJ,skal,nmax,low,
+     :                          posn,posl,lim,dubbel,.FALSE.) 
+         call Merge(.FALSE.,posn,posl)
+         write(*,200) 'The merged file is called clist.out.'
+      else
+         call Merge(.TRUE.,posn,posl)
+         write(*,200) 'The generated file is called clist.out.'
+      endif
+***  end of the original statements    ****************************
+
+The following are the statements to replace the original ones,
+*****************************************************************
+      if (.NOT.advexp) then
+         do  
+         call Matbin(org,lock,closed,varmax,skal,second,anel,
+     :                      par,low,nmax,lim,dubbel,minJ,maxJ) 
+         if(.not.second) exit
+         call Fivelines(org,lock,closed,.FALSE.,posn,posl)
+         call Blanda(org,varmax,lock,minJ,maxJ,skal,nmax,low,
+     :                          posn,posl,lim,dubbel,.FALSE.) 
+         call copy8t7 
+         second = .f.
+         enddo
+      endif
+         call Merge(.TRUE.,posn,posl)
+         write(*,200) 'The generated file is called clist.out.'
+***  end of the statements    ****************************
+
+The following are the statements to replace the above ones,
+*****************************************************************
+           ii=0
+      if(.not.second) then
+         call Merge(.TRUE.,posn,posl,ii)
+         if(advexp) ii=ii+1
+         call open79(ii)
+      endif
+
+      do
+         call Matbin(org,lock,closed,varmax,skal,second,anel,
+     :                      par,low,nmax,lim,dubbel,minJ,maxJ)
+         if(.not.second) exit
+         call Fivelines(org,lock,closed,.FALSE.,posn,posl)
+         call Blanda(org,varmax,lock,minJ,maxJ,skal,nmax,low,
+     :                          posn,posl,lim,dubbel,.FALSE.)
+         call Merge(.F.,posn,posl,ii)
+         ii=ii+1
+         call open79(ii)
+         second = .f.
+      enddo
+      write(*,200) 'The merged file is called clist.out.'
+      if(mod(ii,2).eq.0.and.ii.ne.0) call copy7t9
+***  end of the statements    ****************************

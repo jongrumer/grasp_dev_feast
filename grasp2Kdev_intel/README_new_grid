@@ -1,0 +1,50 @@
+
+-----------------------------------------------------------------------------------------------------------------
+
+Update on how the dynamic grid parameters are set-up and transferred between all grid-dependent routines.
+
+   Jon Grumer (Lund/Shanghai Sept/Oct 2013)
+   jon.grumer@teorfys.lu.se
+
+   A slightly more descriptive pdf document is available as-well, just send an email and ask for it.
+
+-----------------------------------------------------------------------------------------------------------------
+
+1) Idea
+
+- Extend "isodata" to also include information about RNT, H, HP and NNNP
+- Make all routines working on the grid read this information instead of having to run the non-default options
+
+2) Update
+
+a) make-environment_gfort
+   - It is a bit clumsy to go libs in order to modify the grid in parameters.def.
+     The parameter file is therefore set up directly in the make-environment file in the grasp root directory
+   - The only thing the user has to do is to define the flag $NNNP='number of grid-points' and then as usual 
+     source the environment file. Hopefully this will be more straightforward for an inexperienced user.
+
+b) GENISO / GENISO.F
+   - geniso.f now asks if the user wants default grid parameters or input new values
+   - if yes, default values are written to isodata (NNNP is then taken from parameters.def)
+
+c) LIB92 / LODISO.F
+   - The LODISO lib92-subroutine (which is called by SETISO) now also reads the grid parameters RNT, H, HP 
+     and NNNP from isodata and stores them in the GRID common-block.
+
+d) ERWF / GETINF.F
+   - Calls the SETISO subroutine above, which defines the grid parameters. Thus there is no need for default
+     values to be given inside the code. The lines where this takes place in erwf/getinf.f is therfore commented 
+     out.
+
+e) RSCF      / GETSCD.F
+   RCI       / GETCID.F
+   RCI_MPI   / GETCID.F
+   BIOTRA    / RADPAR.F
+   BIOSCL    / GETOSD.F
+   RHFS      / GETHFD.F
+   RIS       / GETSMD.F
+   HFSZEEMAN / GETHFD.F
+   - Same as in the ERWF case above, the internal parameter definitions are commented out as SETISO --> LODISO is 
+     loading them directly from isodata instead.
+
+-----------------------------------------------------------------------------------------------------------------

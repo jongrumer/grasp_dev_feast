@@ -1,0 +1,19 @@
+
+#
+BINDIR  = ${GRASPBIN}
+BINDIR = ../../../bin
+BINFILE = $(BINDIR)/erwf
+FC      = ${GRASPFOR}
+FFLAGS  = ${GRASPOPT}
+APP_LIBS = ${GRASPBLOCKD} -L${GRASPLIB} ${GRASPLIBS}
+
+APP_OBJ= chkplt.o erwf.o frmhyd.o frmrwf.o frmtfp.o \
+         genrwf.o getinf.o prtrem.o sbstep.o setdbg.o \
+         setsum.o solvh.o strsum.o summry.o tail.o \
+         tfpot.o wrtrwf.o screenpar.o
+
+$(BINFILE) : $(APP_OBJ)
+	$(FC) -o $(BINFILE) $(LFLAGS)  $(FFLAGS) $(APP_OBJ) $(APP_LIBS)
+
+.f.o : 
+	$(FC) -c $(FFLAGS) $*.f

@@ -1,0 +1,394 @@
+*** genmat.f.bak	Mon Mar 13 18:18:14 2000
+--- genmat.f	Mon Mar 13 12:03:56 2000
+***************
+*** 1,6 ****
+  ************************************************************************
+  *                                                                      *
+!       SUBROUTINE genmat (atwinv, jblock, myid, nprocs, elsto, irestart)
+        IMPLICIT REAL*8          (A-H, O-Z)
+  *
+  *        Generate Hamiltonian matrix for all blocks
+--- 1,7 ----
+  ************************************************************************
+  *                                                                      *
+!       SUBROUTINE genmat (atwinv, jblock, myid, nprocs, elsto, irestart,
+!      : slf_en)
+        IMPLICIT REAL*8          (A-H, O-Z)
+  *
+  *        Generate Hamiltonian matrix for all blocks
+***************
+*** 14,19 ****
+--- 15,21 ----
+  * Xinghong He 1998-06-23
+  *
+  ************************************************************************
++       DIMENSION SLF_EN(1)
+        POINTER (pntriq,dummy)
+        POINTER (PNEVAL,EVALdum)
+        COMMON/EIGVAL/EAV,PNEVAL
+***************
+*** 108,114 ****
+           icstrt = iread * nprocs + myid + 1
+  *     ...Generate the rest of the Hamiltonian matrix
+           CALL setham (myid, nprocs, jblock, elsto, icstrt, nelmnt
+!      &                , atwinv)
+        ELSE
+           NELMNTtmp = NELMNT
+           NCFtmp = NCF
+--- 110,116 ----
+           icstrt = iread * nprocs + myid + 1
+  *     ...Generate the rest of the Hamiltonian matrix
+           CALL setham (myid, nprocs, jblock, elsto, icstrt, nelmnt
+!      &                , atwinvi,slf_en)
+        ELSE
+           NELMNTtmp = NELMNT
+           NCFtmp = NCF
+*** matrix.f.bak	Mon Mar 13 18:18:42 2000
+--- matrix.f	Mon Mar 13 11:46:20 2000
+***************
+*** 27,33 ****
+        LOGICAL LFORDR,LTRANS,LVP,LSE,LNMS,LSMS,LDBPG
+        CHARACTER*8 CNUM
+  *
+!       DIMENSION SLFINT(NNNW)
+  *
+        POINTER (PNETOT,ETOT(1))
+  *
+--- 27,33 ----
+        LOGICAL LFORDR,LTRANS,LVP,LSE,LNMS,LSMS,LDBPG
+        CHARACTER*8 CNUM
+  *
+!       DIMENSION SLFINT(NNNW),UCF(1),SLF_EN(1)
+  *
+        POINTER (PNETOT,ETOT(1))
+  *
+***************
+*** 53,58 ****
+--- 53,60 ----
+       :      /WAVE/PZ(NNNW),PNTRPF,PNTRQF,MF(NNNW)
+       :      /WHERE/IMCDF
+       :      /BLIM/IPRERUN,NCSFPRE,COEFFCUT1,COEFFCUT2
++      :      /DEF10/AUCM,AUEV,CCMS,FASI,FBSI
++      :      /JLABL/JLBL(32),LABJ(32),LABP(2)
+  
+  *     ...For pre-run
+        POINTER (PNEVEC1,EVEC1(1))
+***************
+*** 188,195 ****
+              CALL genmat2 (irestart, nelmnt_a, elsto)
+              GOTO 80	! need to clear memory
+           ENDIF
+  *        ------------------------
+!          CALL genmat (atwinv, jblock, myid, nprocs, elsto, irestart)
+           CALL genmat2 (irestart, nelmnt_a, elsto)
+  *
+  *   Allocate and deallocate memory for the mixing coefficients 
+--- 190,223 ----
+              CALL genmat2 (irestart, nelmnt_a, elsto)
+              GOTO 80	! need to clear memory
+           ENDIF
++ c zou
++ 
++          IF (LSE) THEN
++             PRINT *, 'Entering QED ...'
++ 
++             WRITE (24,*) 
++             WRITE (24,*) ' Self Energy Corrections: '
++             WRITE (24,*) 
++                CALL QED_SLFEN (SLFINT)
++             DO IC = 1, NCF
++                ELEMNT = 0.0D 00
++                DO I = 1,NW
++                   ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
++                ENDDO
++                SLF_EN(IC) = ELEMNT
++             ENDDO
++ 
++             WRITE (24,*)
++             WRITE (24,*) 'Self-energy corrections estimated'
++      :              //' --- these will influence the data'
++             WRITE (24,*) ' in the RCI92 MIXing coefficients File.'
++          ENDIF
++ c zou
++ 
++ 
+  *        ------------------------
+!          CALL genmat (atwinv, jblock, myid, nprocs, elsto, irestart,
+!      :     slf_en)
+           CALL genmat2 (irestart, nelmnt_a, elsto)
+  *
+  *   Allocate and deallocate memory for the mixing coefficients 
+***************
+*** 223,231 ****
+        WRITE (25) (ivec(i), i = 1, nvec)
+        WRITE (25) EAV,(EVAL(I),I = 1,NVEC)
+        WRITE (25) ((EVEC(I+(J-1)*NCF),I = 1,NCF),J = 1,NVEC)
+! 
+        PRINT *, 'RCI92 MIXing coefficients File generated.'
+! *
+  *   Save the mixing coefficients from the prerun
+  *
+        IF (IPRERUN .EQ. 1) THEN
+--- 251,262 ----
+        WRITE (25) (ivec(i), i = 1, nvec)
+        WRITE (25) EAV,(EVAL(I),I = 1,NVEC)
+        WRITE (25) ((EVEC(I+(J-1)*NCF),I = 1,NCF),J = 1,NVEC)
+! !      print '(5i5)',jblock, ncf, nvec, iiatjpo, iiaspar
+! !      print '(3I20)',(ivec(i), i = 1, nvec)
+! !      print '(3f20.15)',EAV,(EVAL(I),I = 1,NVEC)
+! !      print '(3f20.15)',((EVEC(I+(J-1)*NCF),I = 1,NCF),J = 1,NVEC) 
+        PRINT *, 'RCI92 MIXing coefficients File generated.'
+! *pdbg
+  *   Save the mixing coefficients from the prerun
+  *
+        IF (IPRERUN .EQ. 1) THEN
+***************
+*** 240,257 ****
+  *   eigenvalues and eigenvectors are not modified by these
+  *   estimates
+  *
+!          IF (LSE) THEN
+              PRINT *, 'Entering QED ...'
+              CALL ALLOC (PNETOT,NVEC,8)
+  
+              DO J = 1, nvec
+!                CALL QED (j,SLFINT)
+                 ELEMNT = 0.0D 00
+                 IC = IVEC(J)
+                 DO I = 1,NW
+!                   ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
+                 ENDDO
+                 ETOT(J) = EVAL(J)+ELEMNT
+              ENDDO
+  
+              WRITE (24,*)
+--- 271,304 ----
+  *   eigenvalues and eigenvectors are not modified by these
+  *   estimates
+  *
+!          IF (.not.LSE) THEN
+              PRINT *, 'Entering QED ...'
+              CALL ALLOC (PNETOT,NVEC,8)
+  
++             WRITE (24,*) 
++             WRITE (24,*) ' Self Energy Corrections: '
++             WRITE (24,*) 
++             WRITE (24,301)
++             WRITE (24,*) 
++   301 FORMAT (' Level  J Parity',7X,'Hartrees',14X,'Kaysers',
++      :         16X,'eV' )
++   302 FORMAT (1I3,2X,2A4,1P,3D22.14)
+              DO J = 1, nvec
+!                CALL QED (j,SLFINT,UCF)
+                 ELEMNT = 0.0D 00
+                 IC = IVEC(J)
+                 DO I = 1,NW
+!                   ELEMNT = ELEMNT+UCF(I)*SLFINT(I)
+! c                 ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
+                 ENDDO
+                 ETOT(J) = EVAL(J)+ELEMNT
++ c
++            EAU = ELEMNT  
++            ECM = EAU*AUCM
++            EEV = EAU*AUEV
++            IP = (IIASPAR+3)/2
++            WRITE (24,302) j,LABJ(IiATJPO),LABP(IP),EAU,ECM,EEV
++ c
+              ENDDO
+  
+              WRITE (24,*)
+***************
+*** 360,363 ****
+--- 407,411 ----
+        CALL dalloc (PNTRQF)	! lodrwf or lodres
+  
+        RETURN
++ 
+        END
+*** qed.f.bak	Mon Mar 13 18:17:19 2000
+--- qed.f	Mon Mar 13 16:35:10 2000
+***************
+*** 1,6 ****
+  ************************************************************************
+  *                                                                      *
+!       SUBROUTINE QED (jstate,SLFINT)
+  *                                                                      *
+  *   This  routine estimates corrections to the  energy levels due to   *
+  *   self-energy.                                                       *
+--- 1,6 ----
+  ************************************************************************
+  *                                                                      *
+!       SUBROUTINE QED (jstate,SLFINT,UCF)
+  *                                                                      *
+  *   This  routine estimates corrections to the  energy levels due to   *
+  *   self-energy.                                                       *
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 22,28 ****
+        POINTER (PNIVEC,IVECDUMMY)
+        CHARACTER*2 NH, npchar*1, nakchar
+  *
+!       POINTER (PNTUCF,UCF(1))
+  *
+        POINTER (PNEVEC,EVEC(1))
+        POINTER (PNTRPF,PF(NNNP,1))
+--- 22,29 ----
+        POINTER (PNIVEC,IVECDUMMY)
+        CHARACTER*2 NH, npchar*1, nakchar
+  *
+!       DIMENSION UCF(1)
+! czou  POINTER (PNTUCF,UCF(1))
+  *
+        POINTER (PNEVEC,EVEC(1))
+        POINTER (PNTRPF,PF(NNNP,1))
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 51,57 ****
+  *
+  *   Determine `generalised occupation numbers'
+  *
+!       CALL ALLOC (PNTUCF,NW,8)
+  !
+  ! Modified so that UCFJ describes the current eigenstate
+  !
+--- 52,58 ----
+  *
+  *   Determine `generalised occupation numbers'
+  *
+! czou     CALL ALLOC (PNTUCF,NW,8)
+  !
+  ! Modified so that UCFJ describes the current eigenstate
+  !
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 64,70 ****
+       :                   *EVEC(II+(I-1)*NCF)**2
+      2       CONTINUE
+  !    3    CONTINUE
+!          UCF(J) = UCFJ/DBLE (NCF)
+      4 CONTINUE
+  *
+        DO 14 J = 1,NW
+--- 65,73 ----
+       :                   *EVEC(II+(I-1)*NCF)**2
+      2       CONTINUE
+  !    3    CONTINUE
+! c     print *, ucfj,'ucf'
+!          UCF(J) = UCFJ
+! c zou    UCF(J) = UCFJ/DBLE (NCF)
+      4 CONTINUE
+  *
+        DO 14 J = 1,NW
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 96,106 ****
+  *   Begin by bracketing the charge around the maximum overlap
+  *
+              ZEFF = Z-SHIELD (J)
+!              IF(ZEFF.LT.0.0.OR.ZEFF.GT.130.0) THEN
+!                 SLFINT(J) = 0.0D 00
+!                 CYCLE
+!              ENDIF
+! 
+  !
+  ! Find the approximate zeff
+  ! maxiter is an arbitarily imposed maximum number foriteration
+--- 99,110 ----
+  *   Begin by bracketing the charge around the maximum overlap
+  *
+              ZEFF = Z-SHIELD (J)
+! c           ZEFF = Z-SCREEN (J,UCF)
+! czou        print *, j,'initial Zeff= ',zeff
+!             IF(ZEFF.LT.0.0.OR.ZEFF.GT.130.0) THEN
+!               SLFINT(J) = 0.0D 00
+!               CYCLE
+!             ENDIF
+  !
+  ! Find the approximate zeff
+  ! maxiter is an arbitarily imposed maximum number foriteration
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 185,191 ****
+                    EXIT
+                 ENDIF
+              ENDDO
+! !            PRINT *, jstate, np(j),nh(j),nak(j),' fourth=',i
+  
+  !---------------------------------------------------------------------
+  
+--- 189,203 ----
+                    EXIT
+                 ENDIF
+              ENDDO
+! c      PRINT *, j, np(j),nh(j),nak(j),ovrlap,ucf(j),zeff
+! C Yu Zou ***********************************************
+! C Overlap is small, orbital J is not hydrogenic in the interested 
+! C r-region for a optimized Zeff.
+!             IF(OVRLAP.LT.0.1) THEN
+!               SLFINT(J) = 0.0D 00
+!               CYCLE
+!             ENDIF
+! C Yu Zou 3/8/00/ ***************************************
+  
+  !---------------------------------------------------------------------
+  
+*************** Cww      INTEGER PNTRIQ,PNIVEC
+*** 263,269 ****
+  *
+  *   Deallocate storage for the `generalised occupation numbers'
+  *
+!       CALL DALLOC (PNTUCF)
+  *
+        RETURN
+        END
+--- 275,281 ----
+  *
+  *   Deallocate storage for the `generalised occupation numbers'
+  *
+! czou  CALL DALLOC (PNTUCF)
+  *
+        RETURN
+        END
+*** setham.f.bak	Mon Mar 13 18:17:41 2000
+--- setham.f	Mon Mar 13 13:58:59 2000
+***************
+*** 1,7 ****
+  ************************************************************************
+  *                                                                      *
+        SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt
+!      &                   , atwinv)
+  *                                                                      *
+  *   Sets up the Hamiltonian matrix and determines the average energy.  *
+  *
+--- 1,7 ----
+  ************************************************************************
+  *                                                                      *
+        SUBROUTINE SETHAM (myid, nprocs, jblock, ELSTO,ICSTRT, nelmntt
+!      &                   , atwinv,slf_en)
+  *                                                                      *
+  *   Sets up the Hamiltonian matrix and determines the average energy.  *
+  *
+***************
+*** 61,67 ****
+  *
+        EXTERNAL BREIT,BREID,COR,CORD
+  *
+!       DIMENSION TSHELL(NNNW)
+  
+        POINTER (PNTEMT,EMT(1))
+        POINTER (PNIROW,IROW(1))
+--- 61,67 ----
+  *
+        EXTERNAL BREIT,BREID,COR,CORD
+  *
+!       DIMENSION TSHELL(NNNW),SLF_EN(1)
+  
+        POINTER (PNTEMT,EMT(1))
+        POINTER (PNIROW,IROW(1))
+***************
+*** 385,390 ****
+--- 385,393 ----
+           ENDIF
+  *
+     85    CONTINUE            
++ c zou
++          IF(LSE) EMT(NELC) = EMT(NELC) + SLF_EN(IC)
++ c zou
+  *
+  *   This column is done; write it to disk
+  *

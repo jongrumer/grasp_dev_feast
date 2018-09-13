@@ -1,0 +1,105 @@
+# 
+# ENVIRONMENT VARIABLES
+#
+################# Location of GRASP binaries ##################
+#
+setenv GRASP ${HOME} # where ${HOME} is the name of a directory
+                    # default location for executables: ${HOME}/bin
+                    # default location for libraries: ${HOME}/lib
+set path = ( ${GRASP}/bin $path )  # place the executables on the search path
+
+
+################# System dependent variables ######################
+# If using the PGI compiler, for example, PGI needs to be set :
+# root directory of fortran compiler
+setenv PGI /usr/pgi # root of the PGI compiler
+
+#  When Lapack and Blas libraries are to be used from PGI Fortran 
+# PGI environment requires the definitions:
+
+setenv LAPACK_DIR ${PGI}/linux86/5.0/lib   # Location of Lapack library
+setenv LAPACK_LIB "-llapack -lblas"        # Libraries to be searched
+
+# When included routines are to be used define these variables as:
+setenv LAPACK_DIR ${GRASP}/lib             # Location of needed routines
+setenv LAPACK_LIB "-llapackd -llapacku -lblas" # Libraries to be searched
+
+################# Fortran Compiler ###################################
+#
+setenv FC "pgf95"                          # Fortran compiler 
+setenv FC_MPI "pgf95"                      # MPI compiler 
+setenv FC_FLAGS "-O2 "                     # Serial code compiler flags 
+setenv FC_MPIFLAGS "-O2 -Mmpi "            # Parallel code compiler flags 
+setenv FC_LD "-Bstatic"                    # Serial linker flags
+setenv FC_MPILD "-Mmpi -Bstatic"           # Parallel linker flags 
+setenv FC_MALLOC LINUX                     # memory allocation routine
+
+
+################# C++ Compiler ########################################
+#
+setenv CPP "g++"                           # C++ compiler 
+setenv CPP_FLAGS "-O3"			   # C++ compiler flags
+setenv CPP_LD "-static"                    # C++ linker
+
+
+################# Define grasp2K libraries #############################
+#
+setenv GRASPLIBS "-l92 -lnjgraf -ldvdson -lmpiu"
+setenv NEWGRASPLIBS "-l92 -lrang -ldvdson -lmpiu"
+setenv GRASP_INCLUDES $GRASP/src/lib/def
+ 
+
+EXAMPLES of variable options from various systems, some of only historical
+interest.
+
+Important options for pgf90 LINUX compilers:
+. byteswapio:  ensures binary data files have same format as in UNIX or IBM xlf
+. liblf     :  provides support for long files 
+. static    :  produces files that can be transferred without need for libraries.
+
+#for PGI use:
+setenv GRASP ${HOME}
+setenv FC "/usr/pgi/linux86/bin/pgf90"
+setenv FC_FLAGS "-O2 -byteswapio"
+setenv FC_LD "-L${PGI}/linux86/liblf -Bstatic"
+setenv FC_MALLOC LINUX
+
+
+#for Intel use:
+setenv GRASP ${HOME}/cvs3
+setenv FC "/opt/intel/compiler70/ia32/bin/ifc"
+setenv FC_FLAGS "-O2 -W0"
+setenv FC_LD "-Vaxlib -Bstatic -static"
+setenv FC_MALLOC LINUX
+
+
+Examples for other compilers.
+#for t3e: 
+setenv FC "f90"
+setenv FC_FLAGS "-O3 -dp -e0"
+setenv FC_MALLOC t3e
+setenv FC_LD '-Wl" ${GRASPLIB}/lapack_d2s.cld"'
+setenv GRASPLIBS "-l92 -lnjgraf  -ldvdson"
+
+#for Dec alpha:
+setenv FC f90
+setenv FC_FLAGS "-O4 -r8 -non_shared -static -align dcommon -convert big_endian"
+setenv FC_MALLOC dec
+setenv FC_LD
+setenv GRASPLIBS "-l92 -lnjgraf -ldvdson -llapackd  -llapacku -lblas"
+
+#for Sun
+setenv FC f90
+setenv FC_FLAGS "-O3"
+setenv FC_MALLOC LINUX
+setenv FC_LD
+setenv GRASPLIBS "-l92 -lnjgraf -ldvdson"
+
+#for IBM
+setenv FC xlf
+setenv FC_FLAGS "-O3"
+setenv FC_MALLOC ibmSP
+setenv FC_LD
+setenv GRASPLIBS "-l92 -lnjgraf -ldvdson "
+
+

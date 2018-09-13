@@ -1,0 +1,100 @@
+-----------------------------------------------------------
+            GRASP2K_LIGHT UPDATES DOC
+-----------------------------------------------------------
+Please add description of updates of the grasp2k_light code
+in the following format
+
+Date  : YYYY-MM-DD
+User  : Grasp Graspsson
+Code  : Affected code(s), such as rci or bioscl
+Update: Short description of patch and which subroutines 
+        that are changed.
+-----------------------------------------------------------
+
+Date  : 2013 Spring
+User  : Jon Grumer
+Code  : Grasp2k_light
+Update: Removed old versions of codes to make the package more 
+        easy to grasp (<-- Obs! pun!) and added the folder extra wich 
+        contains newly written small applications such as orbreduce or
+        zero_first_order_space.
+
+        Modified Makefiles and the src/ folder tree.
+
+Date  : 2013-10-
+User  : Jon Grumer
+Code  : All grid dependent codes + iso
+Update: Included grid parameters in isodata and modified all applications
+        and libs to read this info. Makes it much easier to run with a 
+        non-default grid. The major difference during runtime is that
+        iso now asks questions concerning the grid, appart from that the experience 
+        will be exactly the same as running with the default grid. The default
+        grid will be the one set by isodata!
+        
+        Please ask Jon (jongrumer@gmail.com/jon.grumer@teorfys.lu.se) 
+        if you need more info.
+
+Date  : 2013-11-12
+User  : Jon Grumer
+Code  : jj2lsj
+Update: Added Gediminas' patch of jj2lsj_code.f90
+
+Date  : 2014-02-04
+User  : Jon Grumer
+Code  : jjreduce, jjreduce_breit
+Update: Added Gediminas' patch of jjreduce/jjreduce_breit, 
+        new version of identy.f
+
+Date  : 2014-02-11
+User  : Jon Grumer
+Code  : rci, rci_mpi
+Update: Added Per's patch of rci/rci_mpi from 2013-04-13 defining 
+        the ATWINV variable in setham_gg.f as below. Related to 
+        mass shift.
+
+        !Per Bug fix 30/4-2013
+            ATWINV = 1.D0/EMN
+        !Per Bug fix 30/4-2013
+
+Date  : 2014-02-11
+User  : Jon Grumer
+Code  : rci_mpi
+Update: NELMNT which is the number of non-zero elements in rci overflows 
+        for large cases. Added a patch by the Brussels people (T Carette)
+        which declares the shared NELMNT_a as an integer*8 variable in 
+        subroutines genmat2.f, maneig.f and matrix.f.
+
+        In some more detail, NELMNT is a PRIVATE integer*4 keeping track
+        of the number of nonzero matrix elements of each task. All these
+        counters are summed up (with an All_reduce call) to the SHARED 
+        variable NELMNT_a which now is declared as integer*8.
+
+Date  : 2014-02-16
+User  : Per Jonsson
+Code  : lib92, libmpi, rci, rscf
+        inetger has been updated to integer*8 as described in attached
+        latex document rci_overflow.tex
+
+Date  : 2014-03-04
+User  : Per Jonsson
+Code  : rscf, integer*8 has been commented out. Did not work. If this is 
+        to work, similar change needs to be done in mcp. For the future
+
+Date  : 2014-03-04
+User  : Per Jonsson
+Code  : erwf, a subroutine canonical has been added. The subroutine arranges
+        the orbitals in canonical order before any estimates are done. This
+        mean that the orthogonalization will always be correct whatever orbital
+        order of the rcsl.inp list 
+
+Date  : 2014-07-28
+User  : Per Jonsson
+Code  : erwf, dimensions in the two variables in canonical has been increased to 1000                
+
+Date  : 2014-07-28
+User  : Per Jonsson
+Code  : jjreduce_breit, in mcp_gg line1 has been redimensioned to 1000 (similar change in the loop)
+
+Date  : 2014-07-28
+User  : Per Jonsson
+Code  : jjgen, in fivefirst. Change has been done in order to correctly write out the string of Peel shells

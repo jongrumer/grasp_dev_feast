@@ -1,0 +1,24 @@
+
+LIBDIR  = ${GRASPLIB}
+BINDIR  = ${GRASPBIN}
+BINDIR = ../../../bin
+BINFILE = $(BINDIR)/iso
+FC      = ${GRASPFOR}
+FFLAGS  = ${GRASPOPT}
+
+#
+# Actually only needs these
+# APP_LIBS = $(LIBDIR)/lib92.a
+#
+BLOCK_DATA = ../bd/consts.o
+
+APP_LIBS = ${GRASPBLOCKD} -L${GRASPLIB} ${GRASPLIBS}
+
+APP_OBJ= estrms.o geniso.o getcpr.o skfun.o
+
+$(BINFILE) : $(APP_OBJ)
+	$(FC) -o $(BINFILE) $(FFLAGS) $(APP_OBJ) $(APP_LIBS)
+
+.f.o : 
+	$(FC) -c $(FFLAGS) $*.f
+

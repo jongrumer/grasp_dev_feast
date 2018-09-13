@@ -1,0 +1,501 @@
+************************************************************************
+*                                                                      *
+      SUBROUTINE NATORBNEW(NAME)
+*                                                                      *
+*   IF angular coefficients must be calculated                         *
+*   This routine controls combines the radial and angular parts for the*
+*   calculation of the NMS parameter, the electron density at the      *
+*   origin and radial expectation values.
+*                                                                      *
+*   Call(s) to: [LIB92]: ALCBUF, CONVRT, GETYN                         *
+*                        ITJPO, ONESCALAR                              *
+*                                                                      *
+*   Written by Per Jonsson                                             *
+*                                                                      *
+*                                         Last revision: 10 Nov 1995   *
+*                                                                      *
+*   Modified by C. Naz\'e  Feb. 2012                                   *
+*   Modified by J. Ekman   Nov. 2013                                   *
+*                                                                      *
+************************************************************************
+
+      IMPLICIT DOUBLEPRECISION (A-H, O-Z)
+      include 'parameters.def'
+      EXTERNAL dsyev                                              ! JE ADD
+
+CGG      PARAMETER (NNNP = 590)
+CGG      PARAMETER (NNN1 = 600)
+CGG      PARAMETER (NNNW = 120)
+Cww      INTEGER PNTRIQ,
+Cww     :        PINDTE,PVALTE
+      PARAMETER (KEY = KEYORB)
+      POINTER (PINDTE,INDTEDUMMY)
+      POINTER (PVALTE,VALTEDUMMY)
+      CHARACTER*11 CNUM
+      CHARACTER*4 JLBL,LABJ,LABP
+      CHARACTER*2 CK,NH
+      CHARACTER*20 ORBKAPPA(-10:10)                                ! JEADD
+      CHARACTER*256 FILNAM                                         ! JEADD
+      CHARACTER*24 NAME                                            ! JE ADD
+      LOGICAL GETYN,FIRSTT,LDBPA,VSH,NUCDE,SMSSH,YES
+      LOGICAL LFORDR,LTRANS,LVP,LSE,LNMS,LSMS
+*
+      DIMENSION TSHELL(NNNW)
+      DIMENSION DINT1(NNNW,NNNW),DINT2(NNNW,NNNW),DINT3(NNNW,NNNW)
+      DIMENSION DINT4(NNNW,NNNW),DINT5(NNNW,NNNW),DINT6(NNNW,NNNW)
+      DIMENSION DINT7(NNNW,NNNW)
+      DIMENSION TSHELL_S(NNNW), IA_S(NNNW)
+      DIMENSION DINT1VEC(NNNW,NNNW,NNNP),ELEMNT1VEC(NNNP)                   ! JE ADD
+      DIMENSION CONTRI1VEC(NNNP),DENS1VEC(NVEC,NNNP)                        ! JE ADD
+      !DIMENSION DENSMAT(10,-10:10,5,5)                                     ! JE ADD
+      DOUBLE PRECISION, DIMENSION(:,:,:,:), ALLOCATABLE :: DENSMAT          ! JE ADD
+!      DOUBLE PRECISION, DIMENSION(:,:,:,:), ALLOCATABLE :: DENSMAT          ! JE ADD
+!      DOUBLE PRECISION, DIMENSION(:,:), ALLOCATABLE :: DENSMAT2             ! JE ADD
+      !DOUBLE PRECISION :: DENSMAT2(10,10)
+      DIMENSION DENSMAT2(10,10)
+!      DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: eig                    ! JE ADD
+      DIMENSION EIG(7)
+!      INTEGER, DIMENSION(:,:), ALLOCATABLE :: NORB                          ! JE ADD
+      DIMENSION NORB(-10:10,1:10)                                                  ! JE ADD
+!      INTEGER, DIMENSION(:), ALLOCATABLE :: KFLAG                           ! JE ADD
+      INTEGER KFLAG(-10:10)                                                  ! JE ADD
+      INTEGER IFIRST(100)                                                   ! JE ADD
+      INTEGER NC(100)                                                       ! JE ADD
+      DIMENSION DUMMY(100)                                                  ! JE ADD
+      INTEGER ROTCHECK(NNNW)                                                ! JE ADD
+*
+      POINTER (PNSMS1,SMSC1(1))
+      POINTER (PNSMS2,SMSC2(1))
+      POINTER (PNDENS1,DENS1(1))
+      POINTER (PNDENS2,DENS2(1))
+      POINTER (PNDENS3,DENS3(1))
+      POINTER (PNDENS4,DENS4(1))
+      POINTER (PNDENS5,DENS5(1))
+      POINTER (PNDENS6,DENS6(1))
+      POINTER (PNDENS7,DENS7(1))
+      POINTER (PLABEL,LABEL(6,1))
+      POINTER (PCOEFF,COEFF(1))
+      POINTER (PNEVAL,EVAL(1))
+      POINTER (PNEVEC,EVEC(1))
+      POINTER (PNIVEC,IVEC(1))
+      POINTER (PIATJP,IATJPO(1)),(PIASPA,IASPAR(1))
+      POINTER (PNTRPF,PF(NNNP,1)),(PNTRQF,QF(NNNP,1))   ! JE ADD
+*
+CGG      EXTERNAL COR,CORD
+      COMMON/DEBUGA/LDBPA(5)
+     :      /DECIDE/LFORDR,LTRANS,LVP,LSE,LNMS,LSMS
+     :      /DEF1/ATW,IONCTY,NELEC,Z
+     :      /DEF3/EMPAM,RBCM
+     :      /DEF9/CVAC,PI
+     :      /DEF10/AUCM,AUEV,CCMS,FASI,FBSI
+     :      /DEF11/FMTOAU,B1
+     :      /EIGVAL/EAV,PNEVAL
+     :      /EIGVEC/PNEVEC
+     :      /FOPARM/ICCUT
+     :      /GRID/R(NNN1),RP(NNN1),RPOR(NNN1),RNT,H,HP,N
+     :      /JLABL/JLBL(32),LABJ(32),LABP(2)
+     :      /NPAR/PARM(2),NPARM
+     :      /PRNT/NVEC,PNIVEC,NVECMX
+     :      /SYMA/PIATJP,PIASPA
+     :      /OPT6/NTC(10)
+     :      /ORB1/E(NNNW),GAMA(NNNW)                      ! JE ADD
+     :      /ORB2/NCF,NW
+     :      /TEILST/NDTEA,NTEI,PINDTE,PVALTE,FIRSTT
+     :      /BUFFER/NBDIM,PLABEL,PCOEFF,NVCOEF
+     :      /ORB4/NP(NNNW),NAK(NNNW)
+     :      /ORB10/NH(NNNW)
+     :      /WAVE/PZ(NNNW),PNTRPF,PNTRQF,MF(NNNW)          ! JE ADD
+     :      /SMS1/PNSMS1,PNSMS2,PNDENS1,PNDENS2,PNDENS3,PNDENS4
+     :              ,PNDENS5,PNDENS6,PNDENS7
+*     
+*     Matrix elements smaller than CUTOFF are not accumulated
+*     
+      PARAMETER (CUTOFF = 1.0D-10)
+      
+      MAXK = maxval(NAK(1:NW))
+      MINK = minval(NAK(1:NW))
+      MAXN = maxval(NP(1:NW))
+      MINN = minval(NP(1:NW))
+
+      ORBKAPPA(-6) = '6h 7h ..'
+      ORBKAPPA(-5) = '5g 6g ..'
+      ORBKAPPA(-4) = '4f 5f ..'
+      ORBKAPPA(-3) = '3d 4d ..'
+      ORBKAPPA(-2) = '2p 3p ..'
+      ORBKAPPA(-1) = '1s 2s ..'
+      ORBKAPPA(1) = '2p- 3p- ...'
+      ORBKAPPA(2) = '3d- 4d- ...'
+      ORBKAPPA(3) = '4f- 5f- ...'
+      ORBKAPPA(4) = '5g- 6g- ...'
+      ORBKAPPA(5) = '6h- 7h- ...'
+
+      write(*,*) 'Maximum Kappa: ', MAXK
+      write(*,*) 'Minimum Kappa: ', MINK
+      write(*,*) 'Maximum N: ', MAXN
+      write(*,*) 'Minimum N: ', MINN
+      write(*,*)
+!      write(*,*) 'DIAG/NDIAG CSF1        CSF2        2J+1       Kappa        
+!     :      nl             nl   Contribution to density matrix'
+!      write(*,*) '------------------------------------------------------
+!     :----------------------------------------------------'
+
+      ALLOCATE( DENSMAT(NVEC,MINK:MAXK,MINN:MAXN,MINN:MAXN) )
+!      ALLOCATE( DENSMAT2(MINN:MAXN,MINN:MAXN) )
+!      ALLOCATE( DENSMAT2(10,10) )
+!      ALLOCATE( eig(MAXN) )
+!      ALLOCATE( NORB(MINK:MAXK,MINN:MAXN) )
+!      ALLOCATE( KFLAG(MINK:MAXK) )
+
+      ROTCHECK(:) = 0              ! JE ADD
+      DENS1VEC(:,:) = 0.0D 00      ! JE ADD
+      DENSMAT(:,:,:,:) = 0.0D 00   ! JE ADD
+      KFLAG(:) = 0
+      DO I=1,NW
+         KFLAG(NAK(I)) = KFLAG(NAK(I)) + 1
+      END DO
+
+      DO I=MINK,MAXK
+         write(*,*) 'Kappa: ',I,'  Kappa flag: ',KFLAG(I)
+      END DO
+
+*     
+*     Set the rank (zero) and parity (even) for the one-particle
+*     coefficients
+*     
+      KA = 0
+      IOPAR = 1
+      INCOR = 1
+*     
+*     Allocate storage for the arrays in BUFFER
+*     
+      CALL ALCBUF (1)
+*     
+*     Sweep through the Hamiltonian matrix to determine the
+*     sms parameter
+*     
+      DO 13 IC = 1,NCF
+*     
+*     Output IC on the screen to show how far the calculation has preceede
+*     
+         CALL CONVRT (IC,CNUM,LCNUM)
+         if (mod(IC,100).eq.0) then
+            PRINT *, 'Column '//CNUM(1:LCNUM)//' complete;'
+         end if
+*     
+         ITJPOC = ITJPO(IC)
+         DO 12 IR = IC,NCF
+!            write(*,*) 'IC: ', IC, '  IR: ', IR
+!            write(*,*) '--------------------------------------------'
+*     
+*     Matrix elements are diagonal in J
+*     
+            IF (ITJPO(IR) .EQ. ITJPOC) THEN
+*     
+*     Initialise the accumulator
+*     
+               ELEMNT1 = 0.0D 00
+*     
+*     Call the MCT package to compute T coefficients
+*     
+               CALL ONESCALAR(IC,IR,IA,IB,TSHELL)
+CGG   CALL TNSRJJ (KA,IOPAR,IC,IR,IA,IB,TSHELL)
+               IF (IA .NE. 0) THEN
+                  IF (IA .EQ. IB) THEN
+                     NCONTR = 0
+                     DO 8 IA = 1,NW
+                        IF (ABS (TSHELL(IA)) .GT. CUTOFF) THEN
+                           NCONTR = NCONTR + 1
+                           TSHELL_S(NCONTR) = TSHELL(IA)
+                           IA_S(NCONTR) = IA
+                           ELEMNT1 = TSHELL(IA)
+                           DO 9 J = 1,NVEC
+                              LOC = (J-1)*NCF
+                             CONTRI1 = EVEC(IC+LOC)*EVEC(IR+LOC)*ELEMNT1
+                              IF (IR.NE.IC) THEN
+                                 !CONTRI1 = 2.0D 00 * CONTRI1
+                                 CONTRI1 = 1.0D 00 * CONTRI1       ! THIS MUST BE CHECKED
+                                 write(*,*) 'WARNING:CHECK CONTRIBUTION'
+                              ENDIF
+!                              write(*,*) 'D',IC,IR,IATJPO(J),NAK(IA), 
+!     :                             NP(IA),NH(IA),NP(IA),NH(IA),CONTRI1
+                              ! FILL DENSITY MATRIX WITH DIAGONAL ELEMENTS
+                              DENSMAT(J,NAK(IA),NP(IA),NP(IA)) = 
+     :                        DENSMAT(J,NAK(IA),NP(IA),NP(IA)) + CONTRI1
+ 9                         CONTINUE
+                        ENDIF
+ 8                   CONTINUE
+                     IF (DOIT.EQ.1) WRITE(50) IC,IR,NCONTR
+                     DO I = 1,NCONTR
+                        LAB = IA_S(I)*(KEY + 1)
+                        IF (DOIT.EQ.1) WRITE(50) TSHELL_S(I),LAB
+                     END DO
+                  ELSE          !IF IA NOT EQUAL TO IB
+                     IF (ABS (TSHELL(1)) .GT. CUTOFF) THEN
+                        IF (NAK(IA).EQ.NAK(IB)) THEN
+                           IF (DOIT.EQ.1) WRITE(50) IC,IR,1
+                           LAB = IA*KEY + IB
+                           IF (DOIT.EQ.1) WRITE(50) TSHELL(1),LAB
+                           ELEMNT1 = TSHELL(1)
+                           DO 10 J = 1,NVEC
+                              LOC = (J-1)*NCF
+                             CONTRI1 = EVEC(IC+LOC)*EVEC(IR+LOC)*ELEMNT1
+                              IF (IR.NE.IC) THEN
+                                 !CONTRI1 = 2.0D 00 * CONTRI1
+                                 CONTRI1 = 1.0D 00 * CONTRI1     ! THIS IS PROBABLY OK! BUT SHOULD BE CHECKED ANYWAY
+                              ENDIF
+ !                             write(*,*) 'N',IC,IR,IATJPO(J),NAK(IA), 
+ !    :                             NP(IA),NH(IA),NP(IB),NH(IB),CONTRI1
+                              ! FILL DENSITY MATRIX WITH NON-DIAGONAL ELEMENTS
+                              DENSMAT(J,NAK(IA),NP(IA),NP(IB)) = 
+     :                        DENSMAT(J,NAK(IA),NP(IA),NP(IB)) + CONTRI1
+                              DENSMAT(J,NAK(IA),NP(IB),NP(IA)) = 
+     :                        DENSMAT(J,NAK(IA),NP(IA),NP(IB))
+ 10                        CONTINUE
+                        ENDIF   ! END KAPPA(IA) EQUAL TO KAPPA(IB)
+                     ENDIF      ! END CUTOFF
+                  ENDIF         ! END IA NOT EQUAL TO IB
+               ENDIF            ! END IA NOT EQUAL TO 0
+            ENDIF  ! ENDS  IF (ITJPO(IR) .EQ. ITJPOC) THEN
+ 12      CONTINUE
+ 13   CONTINUE
+      write(*,*)
+
+      ! CONSTRUCT ARRAY THAT GIVES THE ORBIT ORDER AS A 
+      ! FUNCTION OF KAPPA AND N. TO BE USED BELOW!
+      DO I = 1,NW
+         NORB(NAK(I),NP(I)) = I
+      END DO
+
+      DO I=MINK,MAXK
+         write(*,*) 'Kappa: ',I,'  Kappa flag: ',KFLAG(I)
+      END DO
+         
+      ! LOOP OVER KAPPA FROM KAPPA = MINK TO KAPPA = MAXK
+      DO IK = MINK,MAXK
+         write(*,*) 'KAPPA -3: ',IK,' Kappa flag: ', KFLAG(-3)
+         ! KAPPA = 0 DOES NOT EXIST
+         IF (KFLAG(IK).GT.0) THEN
+            ! DETERMINE MINN AND MAXN FOR KAPPA = IK
+            MINN = 100
+            MAXN = 0
+            DO I = 1,NW
+               IF(NAK(I).EQ.IK) THEN
+                  IF(NP(I).LT.MINN) MINN = NP(I)
+                  IF(NP(I).GT.MAXN) MAXN = NP(I)
+               END IF
+            END DO
+
+            !IF (IK.LT.0) MINN = ABS(IK)
+            !IF (IK.GT.0) MINN = IK + 1
+            
+            NDIM = MAXN - MINN + 1
+            LPAR=NDIM*(3+NDIM/2)
+            
+            ! ALLOCATE MATRIX DENSMAT2
+            ! ALLOCATE( DENSMAT2(NDIM,NDIM) )
+            
+            write(*,*) 
+            write(*,*) '-------------------------------------'
+            write(*,'(a,i4,a,a)') 'KAPPA: ', IK, '  ORB: ', ORBKAPPA(IK)
+            write(*,*) '-------------------------------------'
+            write(*,*) 'NDIM: ', NDIM
+
+            ! LOOP OVER STATES AND FILL DENSITY MATRIX DENSMAT2 FOR KAPPA = IK
+            ! MATRICES ARE WEIGHTED WITH THEIR STATISTICAL WEIGHT: 2J+1 (IATJPO)
+            SWSUM = 0.0d0
+            DO IV = 1,NVEC
+               DO IA = 1,NDIM
+                  DO IB = 1,NDIM
+                     IF(IV.EQ.1) THEN
+                        DENSMAT2(IA,IB) = IATJPO(IV)* 
+     :                       DENSMAT(IV,IK,IA+MINN-1,IB+MINN-1)
+                     ELSE
+                        DENSMAT2(IA,IB) = DENSMAT2(IA,IB) + IATJPO(IV)*
+     :                       DENSMAT(IV,IK,IA+MINN-1,IB+MINN-1)
+                     END IF
+                  END DO
+               END DO
+               SWSUM = SWSUM + IATJPO(IV)
+            END DO
+
+            !write(*,*) SWSUM
+
+            ! OBTAIN THE WEIGHTED AVERAGE DENSITY MATRIX
+            DENSMAT2 = DENSMAT2/SWSUM
+
+            ! WRITE OUT DENSITY MATRIX FOR KAPPA = IK FOR 
+            ! N = MINN TO N = MAXN
+            write(*,*) 'density matrix:'
+            DO IA = 1,NDIM
+               write(*,'(i4,10f12.7)')IA+MINN-1,DENSMAT2(1:NDIM,IA)
+            END DO
+            write(*,*)
+            write(*,*) 'Hejsan'
+            
+            ! CALL DSYEV FOR EIGENVALUES AND EIGENVECTORS
+            ! NOTE THAT EIGENVALUES ARE GIVEN IN ASCENDING 
+            ! ORDER AND EIGENVECTORS ARE GIVEN IN AN ORDER
+            ! CORRESPONDING TO THE EIGENVALUES.
+            ! EIGENVALUES ARE STORED IN ARRAY eig
+            ! EIGENVECTORS ARE STORED IN 2D INPUT ARRAY DENSMAT2
+            write(*,*) 'NDIM: ', NDIM
+            write(*,*) 'LPAR: ', LPAR
+            EIG(:) = 0.0D 00
+            write(*,*) 'Hejsan'
+            !write(*,*) 'DENSMAT2: ', DENSMAT2
+            write(*,*) 'EIG: ', EIG
+
+            call dsyev('V','U',NDIM,DENSMAT2(1:NDIM,1:NDIM),
+     :           NDIM,EIG,work,LPAR,inf)
+            write(*,*) 'Hejsan 2'
+            ! WRITE OUT EIGENVALUES
+            write(*,*) 'eigenvalues:'
+            DO IA = 1,NDIM
+               write(*,'(i4,f12.7)') IA, EIG(IA)
+            END DO
+            write(*,*)
+            ! WRITE OUT EIGENVECTORS
+            write(*,*) 'eigenvectors:'
+            DO IA = 1,NDIM
+               write(*,'(i4,10f12.7)') IA,DENSMAT2(1:NDIM,IA)
+            END DO
+            
+            ! IF MATRIX DIMENSION > 1
+            IF(NDIM.GT.1) THEN
+               ! MATCH EIGENVECTORS WITH CORRESPONDING ORBIT (WITH PRINCIPAL QUANTUM NUMBER N)
+               ! NC(IB=N-MINN+1) = IA (ROW IN EIGENVALUE MATRIX)
+               NC = 0
+               DO IA = 1,NDIM
+                  CONTRIB = 0.0
+                  DO IB = 1,NDIM
+                     IF(ABS(DENSMAT2(IB,IA)).GT.CONTRIB) THEN
+                        CONTRIB = ABS(DENSMAT2(IB,IA))
+                        NC(IB) = IA
+                     ENDIF
+                  END DO
+               END DO
+               write(*,*) 'PROBING 1!'
+               ! IDENTIFY ORBITS - IFIRST(IA) = NORB(IK,MINN+IA-1) AND
+               ! DETERMINE MAXIMUM NUMBER OF RADIAL POINTS OCCURING
+               ! IN ORBITS CORRESPONDING TO THE EIGENVECTORS
+               MFMAX = 0
+               DO IA = 1,NDIM
+                  IFIRST(IA) = NORB(IK,MINN+IA-1)
+                  write(*,*) 'IFIRST: ', IFIRST(IA)
+                  !write(*,*) NC(IA),NP(IFIRST(IA)),NH(IFIRST(IA))
+                  ROTCHECK(IFIRST(IA)) = 1
+                  IF(MF(IFIRST(IA)).GT.MFMAX) THEN
+                     MFMAX = MF(IFIRST(IA))
+                  END IF
+               END DO
+               ! LOOP OVER RADIAL POINTS
+
+               DO K = 1,MFMAX
+                  ! STORE LARGE COMPONENT (P) WAVEFUNCTION VALUE OF POINT K
+                  ! IN ARRAY DUMMY FOR THE NDIM ORBITALS
+                  DO IA = 1,NDIM
+                     DUMMY(IA) = PF(K,IFIRST(IA))
+                  END DO
+                  ! DETERMINE THE NATURAL P WAVEFUNCTION VALUE OF 
+                  ! POINT K FOR THE NDIM ORBITALS USING THE 
+                  ! EIGENVECTORS
+                  DO IA = 1,NDIM
+                     DO IB = 1,NDIM
+                        IF(IB.EQ.1) THEN
+                           PF(K,IFIRST(NC(IA))) = 
+     :                          DENSMAT2(IB,IA)*DUMMY(IB) 
+                        ELSE
+                           PF(K,IFIRST(NC(IA))) = PF(K,IFIRST(NC(IA))) +
+     :                          DENSMAT2(IB,IA)*DUMMY(IB) 
+                        ENDIF
+                     END DO
+                  END DO
+                  ! STORE SMALL COMPONENT (Q) WAVEFUNCTION VALUE OF POINT K
+                  ! IN ARRAY DUMMY FOR THE NDIM ORBITALS
+                  DO IA = 1,NDIM
+                     DUMMY(IA) = QF(K,IFIRST(IA))
+                  END DO
+                  ! DETERMINE THE NATURAL Q WAVEFUNCTION VALUE OF 
+                  ! POINT K FOR THE NDIM ORBITALS USING THE 
+                  ! EIGENVECTORS
+                  DO IA = 1,NDIM
+                     DO IB = 1,NDIM
+                        IF(IB.EQ.1) THEN
+                           QF(K,IFIRST(NC(IA))) = 
+     :                          DENSMAT2(IB,IA)*DUMMY(IB) 
+                        ELSE
+                           QF(K,IFIRST(NC(IA))) = QF(K,IFIRST(NC(IA))) +
+     :                          DENSMAT2(IB,IA)*DUMMY(IB) 
+                        ENDIF
+                     END DO
+                  END DO
+               END DO                  ! LOOP OVER RADIAL POINTS ENDS
+               ! STORE PZ VALUE IN ARRAY DUMMY FOR THE NDIM ORBITALS
+               DO IA = 1,NDIM
+                  DUMMY(IA) = PZ(IFIRST(IA))
+               ! DETERMINE PZ VALUES OF THE NDIM NATURAL ORBITS
+               END DO
+               DO IA = 1,NDIM
+                  DO IB = 1,NDIM
+                     IF(IB.EQ.1) THEN
+                        PZ(IFIRST(NC(IA))) = 
+     :                       DENSMAT2(IB,IA)*DUMMY(IB) 
+                     ELSE
+                        PZ(IFIRST(NC(IA))) = PZ(IFIRST(NC(IA))) +
+     :                       DENSMAT2(IB,IA)*DUMMY(IB) 
+                     ENDIF
+                  END DO
+                  ! IF DERIVATIVE AT ORIGIN IS NEGATIVE CHANGE SIGN OF
+                  ! PF, QF AND PZ
+                  IF(PZ(IFIRST(NC(IA))).LT.0.0) THEN
+                     PF(:,IFIRST(NC(IA))) = 
+     :                    -PF(:,IFIRST(NC(IA)))
+                     QF(:,IFIRST(NC(IA))) = 
+     :                    -QF(:,IFIRST(NC(IA)))
+                     PZ(IFIRST(NC(IA))) = -PZ(IFIRST(NC(IA)))
+                  END IF
+               END DO
+               ! SET THE MAXIMUM NUMBER OF RADIAL POINTS TO MFMAX
+               ! FOR ALL ORBITALS   
+               DO IA = 1,NDIM
+                  MF(IFIRST(IA)) = MFMAX
+               END DO
+            ENDIF                      ! IF(NDIM.GT.1) ENDS
+            !DEALLOCATE(DENSMAT2)
+            DENSMAT2(:,:) = 0.0D 00
+         ENDIF                         ! IF (ABS(IK).GT.0) ENDS
+      END DO                           ! LOOP OVER KAPPA ENDS
+
+      ! WRITE NATURAL ORBITALS TO FILE <NAME>.nw
+      write(*,*)
+      write(*,*) '--------------------------------------'
+      write(*,*) 'Natural orbits are written to file'
+      write(*,*) ' nl     KAPPA     PZ           ROTATED'
+      write(*,*) '--------------------------------------'
+      K=INDEX(NAME,' ')
+      FILNAM = NAME(1:K-1)//'.nw'
+      OPEN(36,FILE=FILNAM,FORM='UNFORMATTED',STATUS = 'UNKNOWN')
+      WRITE(36) 'G92RWF'
+      DO I = 1,NW
+         WRITE(*,'(i3,a,i8,f15.7,i8)') NP(I),NH(I),NAK(I),PZ(I),
+     :        ROTCHECK(I)
+         WRITE(36) NP(I),NAK(I),E(I),MF(I)
+         WRITE(36) PZ(I),(PF(J,I),J = 1,MF(I)),(QF(J,I),J = 1,MF(I))
+         WRITE(36) (R(J),J = 1,MF(I))
+      ENDDO
+      CLOSE(36)
+
+      IF (DOIT.EQ.1) WRITE(50) -1
+*     
+*     Empty the buffer and close file
+      IF (DOIT.EQ.1) CLOSE(50)
+*     
+
+
+*     Deallocate storage for the arrays in BUFFER
+      write(*,*) 'Hejsan'
+      CALL ALCBUF (3)
+
+      RETURN
+      END
+      

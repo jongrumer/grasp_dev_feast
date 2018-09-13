@@ -1,0 +1,10 @@
+equiv(DAXPY)=SAXPY
+equiv(DCOPY)=SCOPY
+equiv(DDOT)=SDOT
+equiv(DGEMV)=SGEMV
+equiv(DLAMCH)=SLAMCH
+equiv(DNRM2)=SNRM2
+equiv(DSCAL)=SSCAL
+equiv(DSPEVX)=SSPEVX
+equiv(DSWAP)=SSWAP
+equiv(IDAMAX)=ISAMAX

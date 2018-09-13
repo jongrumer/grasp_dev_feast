@@ -1,0 +1,376 @@
+************************************************************************
+*                                                                      *
+      SUBROUTINE TNSRJJ (KA,IOPAR,JA,JB,IA1,IA2,VSHELL)
+*                                                                      *
+*   The  main  program for evaluating the reduced matrix elements of   *
+*   a one particle operator for configurations in jj-coupling.         *
+*                                                                      *
+*   Call(s) to: [LIB92]: CFP, FIXJ, GENSUM, ICHOP, IROW1, ISPAR,       *
+*                        ITJPO, ITRIG, SETQNA, VIJOUT.                 *
+*               [NJGRAF]: NJGRAF.                                      *
+*                                                                      *
+*                                           Last update: 02 Nov 1992   *
+*                                                                      *
+************************************************************************
+*
+      IMPLICIT REAL*8          (A-H,O-Z)
+      PARAMETER (NNNW = 120)
+Cww      INTEGER PNTRIQ
+      POINTER (PNTRIQ,RIQDUMMY)
+*
+      PARAMETER (MANGM = 60, MTRIAD = 12)
+      PARAMETER (M3MNGM = 3*MANGM, MANGMP = 2*(MANGM/3))
+      PARAMETER (M6J = 20, MSUM = 10)
+*
+      PARAMETER (EPS = 1.0D-10)
+*
+      LOGICAL FREE,SUMVAR,FAIL
+*
+      DIMENSION VSHELL(NNNW)
+      DIMENSION IS(2),KS(2)
+*
+      COMMON/ARGU/J6C,J7C,J8C,J9C,JWC,J6(M3MNGM),J7(M3MNGM),J8(M3MNGM),
+     :       J9(MANGMP),KW(6,M6J),JDEL,LDEL(M6J,2),SUMVAR(MANGM),MP
+     :      /CONS/ZERO,HALF,TENTH,ONE,TWO,THREE,TEN
+     :      /COUPLE/MJA,NJA,J1(MANGM),J2(MTRIAD,3),J3(MTRIAD,3),
+     :              FREE(MANGM)
+     :      /DUMX/JLIS(NNNW),JC1S(NNNW),JC2S(NNNW)
+     :      /DEBUG/IBUG1,IBUG2,IBUG3,IBUG4,IBUG5,IBUG6
+     :      /L1/JBQ1(3,NNNW),JBQ2(3,NNNW),JTQ1(3),JTQ2(3)
+     :      /M0/JJC1(NNNW),JJC2(NNNW)
+     :      /M1/NQ1(NNNW),NQ2(NNNW)
+     :      /M2/JJQ1(3,NNNW),JJQ2(3,NNNW)
+     :      /M3/JLIST(NNNW),KLIST(NNNW),NPEEL,NCORE
+     :      /ORB2/NCF,NW,PNTRIQ
+     :      /ORB4/NP(NNNW),NAK(NNNW)
+      COMMON/SUMARG/J6P(MANGMP),J7P(MANGMP),J8P(MANGMP),J9P(MANGMP),
+     :              JWORD(6,M6J),NLSUM,NBJ(MSUM),NB6J(MSUM),K6CP(MSUM),
+     :              K7CP(MSUM),K8CP(MSUM),K9CP(MSUM),JSUM6(MTRIAD),
+     :              JSUM4(MTRIAD,M6J),JSUM5(MTRIAD,M6J),INV6J(M6J)
+     :      /TERMS/NROWS,ITAB(31),JTAB(32),NTAB(327)
+*
+      IA1 = 0
+      KK = KA+KA+1
+*      print*, ITJPO (JA),ITJPO (JB),KK,KA,JA,JB
+*      print*, ITRIG (ITJPO (JA),ITJPO (JB),KK)
+      IF (ITRIG (ITJPO (JA),ITJPO (JB),KK) .EQ. 0) RETURN
+      IF ((IOPAR .NE. 0) .AND. (ISPAR (JA)*ISPAR (JB)*IOPAR .NE. 1))
+     :   RETURN
+      IF (ICHKQ1(JA,JB).EQ. 0) RETURN
+*
+      CALL SETQNA (JA,JB)
+      IF (IBUG4 .NE. 0) CALL VIJOUT (JA,JB)
+*
+      DO 1 IJ = 1,NW
+         VSHELL(IJ) = ZERO
+    1 CONTINUE
+*
+*   Analyse peel shell interactions
+*
+      IDQ = 0
+      JA1 = 0
+      JA2 = 0
+*
+      IF (NPEEL .NE. 0) THEN
+*
+        DO 2 JW = 1,NPEEL
+          IJ = JLIST(JW)
+          NDQ = NQ1(IJ)-NQ2(IJ)
+          IF (ABS (NDQ) .GT. 1) GOTO 39
+          IF (NDQ .GT. 0) THEN
+            JA1 = JW
+            IDQ = IDQ+1
+          ELSEIF (NDQ .LT. 0) THEN
+            JA2 = JW
+            IDQ = IDQ+1
+          ENDIF
+    2   CONTINUE
+*
+        IF (IDQ .GT. 2) GOTO 39
+*
+*   Evaluate the array VSHELL
+*
+*   Then there are two possibilities IDQ = 0 or IDQ = 2
+*   if IDQ = 0, then loop over all shells by index ISH
+*   if IDQ = 2, then one orbital fixed on each side
+*
+        NS = NPEEL
+      ENDIF
+*
+      IF (IDQ .EQ. 2) GOTO 19
+*
+*   Loop over shells when IDQ = 0
+*
+      ISH = 0
+      IF (NPEEL .EQ. 0) GOTO 9
+      DO 7 I = 1,NPEEL
+    7    JLIS(I) = JLIST(I)
+      IF (NPEEL .EQ. 1) GOTO 9
+      NPEELM = NPEEL-1
+      DO 8 I = 1,NPEELM
+         JC1S(I) = JJC1(I)
+    8    JC2S(I) = JJC2(I)
+*
+*   If ISH .GT. NW, then loop is over and return
+*
+    9 ISH = ISH+1
+      IF (ISH .GT. NW) RETURN
+      IF (ICHOP (ISH,JA) .EQ. -1) GOTO 9
+      IF (IBUG6 .NE. 0) WRITE (99,308) ISH
+      IF (ICHOP (ISH,JA) .EQ. 0) GOTO 16
+*
+*   Case one --- the ISH-th shell is in the core or in the peel and
+*   closed for both sides
+*
+      I = 1
+      IF (NPEEL.EQ.0) GOTO 15
+      DO 10 I = 1,NPEEL
+        IJ = JLIST(I)
+        IF (ISH .LT. IJ) GOTO 11
+   10 CONTINUE
+      I = NPEEL+1
+      GOTO 13
+   11 IM = NPEEL-I+1
+      DO 12 II = 1,IM
+         JLIST(NPEEL+2-II) = JLIST(NPEEL+1-II)
+         IF (NPEEL.EQ.II) GOTO 13
+         JJC1(NPEEL+1-II) = JJC1(NPEEL-II)
+         JJC2(NPEEL+1-II) = JJC2(NPEEL-II)
+   12 CONTINUE
+   13 CONTINUE
+      IF (I .LT. 3) GOTO 14
+      JJC1(I-1) = JJC1(I-2)
+      JJC2(I-1) = JJC2(I-2)
+      GOTO 15
+   14 I1 = JLIST(1)
+      JJC1(1) = JJQ1(3,I1)
+      JJC2(1) = JJQ2(3,I1)
+   15 JLIST(I) = ISH
+      JA1 = I
+      JA2 = I
+      NS = NPEEL+1
+      GOTO 19
+*
+*   Case two --- the ISH-th shell is in the peel and open for either
+*   side
+*
+   16 NS = NPEEL
+      DO 17 JW = 1,NPEEL
+        NX = ISH-JLIST(JW)
+        IF (NX.EQ.0) GOTO 18
+   17 CONTINUE
+   18 JA1 = JW
+      JA2 = JW
+*
+*   Main computation
+*
+*     JA1, JA2 are the indices of interacting shells in JLIST
+*     IA1, IA2 are the indices of interacting shells in NW
+*
+   19 IA1 = JLIST(JA1)
+      IA2 = JLIST(JA2)
+      KS1 = 2*ABS (NAK(IA1))
+      KS2 = 2*ABS (NAK(IA2))
+*
+*   Check triangular condition for the active shells
+*
+      IF (ITRIG (KS1,KS2,KK).EQ.1) GOTO 99
+      IF (IDQ .EQ. 2) RETURN
+      GOTO 100
+*
+*   Set tables of quantum numbers of non-interacting spectator shells
+*
+   99 CONTINUE
+*
+      DO 26 JW = 1,NS
+        IJ = JLIST(JW)
+        IF (IJ .EQ. IA1) GOTO 23
+        DO 22 K = 1,3
+          JBQ1(K,IJ) = JJQ1(K,IJ)
+   22   CONTINUE
+*
+   23   IF (IJ .EQ. IA2) GOTO 26
+        DO 24 K = 1,3
+          JBQ2(K,IJ) = JJQ2(K,IJ)
+   24   CONTINUE
+        IF ((IJ .EQ. IA1) .OR. (IJ .EQ. IA2)) GOTO 26
+        DO 25 K = 1,3
+          IF (JBQ1(K,IJ) .NE. JBQ2(K,IJ)) GOTO 40
+   25   CONTINUE
+   26 CONTINUE
+*
+*   Loop over parent states
+*
+      IS(1) = IA1
+      IS(2) = IA2
+      KS(1) = KS1
+      KS(2) = KS2
+      VAL = ZERO
+      KJ23 = 0
+      IX = 0
+      FAIL = .FALSE.
+*
+      NELCTS = NQ2(IA2)
+      L2 = IROW1(NELCTS,KS2)
+      LLS2 = ITAB(L2)
+      LS2 = JTAB(L2)
+*
+      DO 34 LB = 1,LLS2
+        LS2 = LS2+3
+        IT1 = NTAB(LS2)
+        IT2 = KS2
+        IT3 = JJQ2(3,IA2)
+        IF (ITRIG (IT1,IT2,IT3) .EQ. 0) GOTO 34
+        IF (ABS (NTAB(LS2-2)-JJQ2(1,IA2)) .NE. 1) GOTO 34
+        DO 27 K = 1,3
+          JBQ2(K,IA2) = NTAB(LS2+K-3)
+   27   CONTINUE
+*
+        NELCTS = NQ1(IA1)
+        L1 = IROW1(NELCTS,KS1)
+        LLS1 = ITAB(L1)
+        LS1 = JTAB(L1)
+*
+        DO 33 LA = 1,LLS1
+          LS1 = LS1+3
+          IT1 = NTAB(LS1)
+          IT2 = KS1
+          IT3 = JJQ1(3,IA1)
+          IF (ITRIG (IT1,IT2,IT3) .EQ. 0) GOTO 33
+          IF (ABS (NTAB(LS1-2)-JJQ1(1,IA1)) .NE. 1) GOTO 33
+          DO 28 K = 1,3
+           JBQ1(K,IA1) = NTAB(LS1+K-3)
+   28     CONTINUE
+*
+          DO 20 K = 1,3
+            IF (JBQ1(K,IA1) .NE. JBQ2(K,IA1)) GOTO 33
+            IF (JBQ1(K,IA2) .NE. JBQ2(K,IA2)) GOTO 33
+   20     CONTINUE
+*
+*   Parent shells now defined
+*
+          CALL FIXJ (JA1,JA2,KA,IS,KS,NS,KJ23)
+          KJ23 = 1
+*
+          IF (IBUG6 .NE. 0) THEN
+            MN1 = MJA
+            NS1 = NJA-1
+            WRITE (99,302)
+            WRITE (99,303) (J1(J),J = 1,MN1)
+            WRITE (99,304)
+            DO 30 JW = 1,NS1
+               WRITE (99,305) (J2(JW,K),K = 1,3),(J3(JW,K),K = 1,3)
+   30       CONTINUE
+          ENDIF
+*
+*   Evaluate recoupling coefficient
+*
+          IF (IX .EQ. 0) THEN
+            DO 500 I = 1,MJA
+              FREE(I) = .FALSE.
+  500       CONTINUE
+            IF (LLS2 .NE. 1) FREE(JA2) = .TRUE.
+            CALL NJGRAF (RECUPS,-1,FAIL)
+            IX = 1
+            IF (FAIL) GOTO 501
+          ENDIF
+          CALL GENSUM (J6C,J7C,J8C,J9C,JWC,J6,J7,J8,J9,KW,JDEL,
+     :                LDEL,SUMVAR,MP,
+     :                J6P,J7P,J8P,J9P,JWORD,NLSUM,NBJ,NB6J,
+     :                K6CP,K7CP,K8CP,K9CP,JSUM4,JSUM5,JSUM6,INV6J,
+     :                RECUPS)
+          IF (IBUG6 .NE. 0) WRITE (99,307) RECUPS
+          IF (ABS(RECUPS) .LT. EPS) GOTO 33
+*
+*   Evaluates 2 CFPs
+*
+          IF (KS1 .EQ. 2) GOTO 31
+          II = IA1
+          NEL = NQ1(II)
+          IVP = JBQ1(1,II)
+          IWP = JBQ1(2,II)
+          IJP = JBQ1(3,II)-1
+          IVD = JJQ1(1,II)
+          IWD = JJQ1(2,II)
+          IJD = JJQ1(3,II)-1
+          CALL CFP (KS1,NEL,IJD,IVD,IWD,IJP,IVP,IWP,C)
+          IF (IBUG6 .NE. 0) WRITE (99,306) KS1,NEL,IJD,IVD,IWD,IJP,IVP,
+     :              IWP,C
+          IF (ABS(C) .LT. EPS) GOTO 33
+          RECUPS = RECUPS*C
+*
+31        IF (KS2 .EQ. 2) GOTO 32
+          II = IA2
+          NEL = NQ2(II)
+          IVD = JJQ2(1,II)
+          IWD = JJQ2(2,II)
+          IJD = JJQ2(3,II)-1
+          IVP = JBQ2(1,II)
+          IWP = JBQ2(2,II)
+          IJP = JBQ2(3,II)-1
+          CALL CFP (KS2,NEL,IJD,IVD,IWD,IJP,IVP,IWP,C)
+          IF (IBUG6 .NE. 0) WRITE (99,306) KS2,NEL,IJD,IVD,IWD,
+     :                                              IJP,IVP,IWP,C
+          IF (ABS(C) .LT. EPS) GOTO 33
+          RECUPS = RECUPS*C
+*
+   32     CONTINUE
+          VAL = VAL+RECUPS
+   33   CONTINUE
+   34 CONTINUE
+*
+*   End of loop over parent states
+*
+  501 IF (IDQ .EQ. 2) GOTO 37
+*
+*   IDQ = 0 CASE
+*
+      VSHELL(ISH) = VAL*DBLE (NQ1(IA1))
+*
+*   Loop over all shells when IDQ = 0
+*
+100   CONTINUE
+      IF (NPEEL .EQ. 0) GOTO 9
+      DO 35 I = 1,NPEEL
+   35    JLIST(I) = JLIS(I)
+      IF (NPEEL .EQ. 1) GOTO 9
+      NPEELM = NPEEL-1
+      DO 36 I = 1,NPEELM
+         JJC1(I)  = JC1S(I)
+   36    JJC2(I)  = JC2S(I)
+      GOTO 9
+*
+*   IDQ = 2 Case
+*
+*       Permutation factor for IDQ = 2
+*
+   37 CONTINUE
+      VAL = VAL*SQRT (DBLE (NQ1(IA1)*NQ2(IA2)))
+      LLD1 = MIN (IA1,IA2)+1
+      LLD2 = MAX (IA1,IA2)
+      IDL = 1
+      IF (IA1 .LT. IA2) IDL = 0
+      DO 38 K = LLD1,LLD2
+        IDL = IDL+NQ1(K)
+   38 CONTINUE
+      IF (MOD(IDL,2) .NE. 0) VAL = -VAL
+      VSHELL(1) = VAL
+      RETURN
+*
+   39 IF (IBUG6 .NE. 0) WRITE (99,300)
+      RETURN
+   40 IF (IBUG6 .NE. 0) WRITE (99,301)
+      RETURN
+*
+  300 FORMAT (' One side has more than one interacting electron')
+  301 FORMAT (' Spectator quantum numbers not diagonal for non-interact'
+     :   ,'ing shells')
+  302 FORMAT (/' J1')
+  303 FORMAT (24I5)
+  304 FORMAT (' J2                   J3')
+  305 FORMAT (3I5,I10,2I5)
+  306 FORMAT(' CFP  ',I3,I4,I7,2I4,I7,2I4,1P,D20.9)
+  307 FORMAT(/' Recoupling coefficient = ',1P,D19.12)
+  308 FORMAT(//' ISH = ',I3)
+*
+      END

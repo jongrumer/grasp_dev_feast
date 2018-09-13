@@ -1,0 +1,57 @@
+ The following statements were modified or inserted in subroutine MATRIX.
+ The upper are original and the lower are present.
+
+1.
+*****************************************************************
+<       DIMENSION SLFINT(NNNW)
+---
+>       DIMENSION SLFINT(NNNW),UCF(1)
+*****************************************************************
+
+2. (insert)
+*****************************************************************
+
+---
+>      :      /DEF10/AUCM,AUEV,CCMS,FASI,FBSI
+>      :      /JLABL/JLBL(32),LABJ(32),LABP(2)
+*****************************************************************
+
+3. (insert)
+*****************************************************************
+
+---
+>             WRITE (24,*) 
+>             WRITE (24,*) ' Self Energy Corrections: '
+>             WRITE (24,*) 
+>             WRITE (24,301)
+>             WRITE (24,*) 
+>   301 FORMAT (' Level  J Parity',7X,'Hartrees',14X,'Kaysers',
+>      :         16X,'eV' )
+>   302 FORMAT (1I3,2X,2A4,1P,3D22.14)
+*****************************************************************
+
+4.
+*****************************************************************
+<                CALL QED (j,SLFINT)
+---
+>                CALL QED (j,SLFINT,UCF)
+*****************************************************************
+
+5.
+*****************************************************************
+<                   ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
+---
+>                   ELEMNT = ELEMNT+UCF(I)*SLFINT(I)
+> c                 ELEMNT = ELEMNT+IQ (I,IC)*SLFINT(I)
+*****************************************************************
+
+6. (insert)
+*****************************************************************
+
+---
+>            EAU = ELEMNT  
+>            ECM = EAU*AUCM
+>            EEV = EAU*AUEV
+>            IP = (IIASPAR+3)/2
+>            WRITE (24,302) j,LABJ(IiATJPO),LABP(IP),EAU,ECM,EEV
+*****************************************************************

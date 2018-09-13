@@ -1,0 +1,220 @@
+The following are the original data statements in the GEN subroutine that need to change,
+********************************************************************
+      data  JKVANT(6,0,0,1)           / 0/
+      data  SENIOR(6,0,0,1)           / 0/
+*     l=6 #=0 -
+      data  JKVANT(6,0,1,1)           /11/
+      data  SENIOR(6,0,1,1)           / 1/
+*     l=6 #=1 -
+      data (JKVANT(6,0,2,i),i=1,6)    / 0, 4, 8,12,16,20/
+      data (SENIOR(6,0,2,i),i=1,6)    / 0, 2, 2, 2, 2, 2/
+*     l=6 #=2 -
+      data  JKVANT(6,1,0,1)           / 0/
+      data  SENIOR(6,1,0,1)           / 0/
+*     l=6 #=0 +
+      data  JKVANT(6,1,1,1)           /13/
+      data  SENIOR(6,1,1,1)           / 1/
+*     l=6 #=1 +
+      data (JKVANT(6,1,2,i),i=1,7)    / 0, 4, 8,12,16,20,24/
+      data (SENIOR(6,1,2,i),i=1,7)    / 0, 2, 2, 2, 2, 2, 2/
+*     l=6 #=2 +
+      data  JKVANT(7,0,0,1)           / 0/
+      data  SENIOR(7,0,0,1)           / 0/
+*     l=7 #=0 -
+      data  JKVANT(7,0,1,1)           /13/
+      data  SENIOR(7,0,1,1)           / 1/
+*     l=7 #=1 -
+      data (JKVANT(7,0,2,i),i=1,7)    / 0, 4, 8,12,16,20,24/
+      data (SENIOR(7,0,2,i),i=1,7)    / 0, 2, 2, 2, 2, 2, 2/
+*     l=7 #=2 -
+      data  JKVANT(7,1,0,1)           / 0/
+      data  SENIOR(7,1,0,1)           / 0/
+*     l=7 #=0 +
+      data  JKVANT(7,1,1,1)           /15/
+      data  SENIOR(7,1,1,1)           / 1/
+*     l=7 #=1 +
+      data (JKVANT(7,1,2,i),i=1,8)    / 0, 4, 8,12,16,20,24,28/
+      data (SENIOR(7,1,2,i),i=1,8)    / 0, 2, 2, 2, 2, 2, 2, 2/
+*     l=7 #=2 +
+      data  JKVANT(8,0,0,1)           / 0/
+      data  SENIOR(8,0,0,1)           / 0/
+*     l=8 #=0 -
+      data  JKVANT(8,0,1,1)           /15/
+      data  SENIOR(8,0,1,1)           / 1/
+*     l=8 #=1 -
+      data (JKVANT(8,0,2,i),i=1,8)    / 0, 4, 8,12,16,20,24,28/
+      data (SENIOR(8,0,2,i),i=1,8)    / 0, 2, 2, 2, 2, 2, 2, 2/
+*     l=8 #=2 -
+      data  JKVANT(8,1,0,1)           / 0/
+      data  SENIOR(8,1,0,1)           / 0/
+*     l=8 #=0 +
+      data  JKVANT(8,1,1,1)           /17/
+      data  SENIOR(8,1,1,1)           / 1/
+*     l=8 #=1 +
+      data (JKVANT(8,1,2,i),i=1,9)    / 0, 4, 8,12,16,20,24,28,32/
+      data (SENIOR(8,1,2,i),i=1,9)    / 0, 2, 2, 2, 2, 2, 2, 2, 2/
+*     l=8 #=2 +
+      data  JKVANT(9,0,0,1)           / 0/
+      data  SENIOR(9,0,0,1)           / 0/
+*     l=9 #=0 -
+      data  JKVANT(9,0,1,1)           /17/
+      data  SENIOR(9,0,1,1)           / 1/
+*     l=9 #=1 -
+      data (JKVANT(9,0,2,i),i=1,9)    / 0, 4, 8,12,16,20,24,28,32/
+      data (SENIOR(9,0,2,i),i=1,9)    / 0, 2, 2, 2, 2, 2, 2, 2, 2/
+*     l=9 #=2 -
+      data  JKVANT(9,1,0,1)           / 0/
+      data  SENIOR(9,1,0,1)           / 0/
+*     l=9 #=0 +
+      data  JKVANT(9,1,1,1)           /19/
+      data  SENIOR(9,1,1,1)           / 1/
+*     l=9 #=1 +
+      data (JKVANT(9,1,2,i),i=1,10)   / 0, 4, 8,12,16,20,24,28,32,36/
+      data (SENIOR(9,1,2,i),i=1,10)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2/
+*     l=9 #=2 +
+      data  JKVANT(10,0,0,1)          / 0/
+      data  SENIOR(10,0,0,1)          / 0/
+*     l=10 #=0 -
+      data  JKVANT(10,0,1,1)          /19/
+      data  SENIOR(10,0,1,1)          / 1/
+*     l=10 #=1 -
+      data (JKVANT(10,0,2,i),i=1,10)   / 0, 4, 8,12,16,20,24,28,32,36/
+      data (SENIOR(10,0,2,i),i=1,10)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2/
+*     l=10 #=2 -
+      data  JKVANT(10,1,0,1)          / 0/
+      data  SENIOR(10,1,0,1)          / 0/
+*     l=10 #=0 +
+      data  JKVANT(10,1,1,1)          /21/
+      data  SENIOR(10,1,1,1)          / 1/
+*     l=10 #=1 +
+      data (JKVANT(10,1,2,i),i=1,11)   / 0, 4, 8,12,16,20,24,28,32,36,
+     :                                  40/
+      data (SENIOR(10,1,2,i),i=1,11)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+     :                                   2/
+*     l=10 #=2 +
+*****   end of the original data statement *************************
+
+The following are the data statements changed by Yu Zou,
+      data  JKVANT(6,0,0,1)           / 0/
+c     data  SENIOR(6,0,0,1)           / 0/
+      data  SENIOR(6,0,0,1)           /-1/
+*     l=6 #=0 -
+      data  JKVANT(6,0,1,1)           /11/
+c     data  SENIOR(6,0,1,1)           / 1/
+      data  SENIOR(6,0,1,1)           /-1/
+*     l=6 #=1 -
+      data (JKVANT(6,0,2,i),i=1,6)    / 0, 4, 8,12,16,20/
+c     data (SENIOR(6,0,2,i),i=1,6)    / 0, 2, 2, 2, 2, 2/
+      data (SENIOR(6,0,2,i),i=1,6)    /-1,-1,-1,-1,-1,-1/
+*     l=6 #=2 -
+      data  JKVANT(6,1,0,1)           / 0/
+c     data  SENIOR(6,1,0,1)           / 0/
+      data  SENIOR(6,1,0,1)           /-1/
+*     l=6 #=0 +
+      data  JKVANT(6,1,1,1)           /13/
+c     data  SENIOR(6,1,1,1)           / 1/
+      data  SENIOR(6,1,1,1)           /-1/
+*     l=6 #=1 +
+      data (JKVANT(6,1,2,i),i=1,7)    / 0, 4, 8,12,16,20,24/
+c     data (SENIOR(6,1,2,i),i=1,7)    / 0, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(6,1,2,i),i=1,7)    /-1,-1,-1,-1,-1,-1,-1/
+*     l=6 #=2 +
+      data  JKVANT(7,0,0,1)           / 0/
+c     data  SENIOR(7,0,0,1)           / 0/
+      data  SENIOR(7,0,0,1)           /-1/
+*     l=7 #=0 -
+      data  JKVANT(7,0,1,1)           /13/
+c     data  SENIOR(7,0,1,1)           / 1/
+      data  SENIOR(7,0,1,1)           /-1/
+*     l=7 #=1 -
+      data (JKVANT(7,0,2,i),i=1,7)    / 0, 4, 8,12,16,20,24/
+c     data (SENIOR(7,0,2,i),i=1,7)    / 0, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(7,0,2,i),i=1,7)    /-1,-1,-1,-1,-1,-1,-1/
+*     l=7 #=2 -
+      data  JKVANT(7,1,0,1)           / 0/
+c     data  SENIOR(7,1,0,1)           / 0/
+      data  SENIOR(7,1,0,1)           /-1/
+*     l=7 #=0 +
+      data  JKVANT(7,1,1,1)           /15/
+c     data  SENIOR(7,1,1,1)           / 1/
+      data  SENIOR(7,1,1,1)           /-1/
+*     l=7 #=1 +
+      data (JKVANT(7,1,2,i),i=1,8)    / 0, 4, 8,12,16,20,24,28/
+c     data (SENIOR(7,1,2,i),i=1,8)    / 0, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(7,1,2,i),i=1,8)    /-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=7 #=2 +
+      data  JKVANT(8,0,0,1)           / 0/
+c     data  SENIOR(8,0,0,1)           / 0/
+      data  SENIOR(8,0,0,1)           /-1/
+*     l=8 #=0 -
+      data  JKVANT(8,0,1,1)           /15/
+c     data  SENIOR(8,0,1,1)           / 1/
+      data  SENIOR(8,0,1,1)           /-1/
+*     l=8 #=1 -
+      data (JKVANT(8,0,2,i),i=1,8)    / 0, 4, 8,12,16,20,24,28/
+c     data (SENIOR(8,0,2,i),i=1,8)    / 0, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(8,0,2,i),i=1,8)    /-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=8 #=2 -
+      data  JKVANT(8,1,0,1)           / 0/
+c     data  SENIOR(8,1,0,1)           / 0/
+      data  SENIOR(8,1,0,1)           /-1/
+*     l=8 #=0 +
+      data  JKVANT(8,1,1,1)           /17/
+c     data  SENIOR(8,1,1,1)           / 1/
+      data  SENIOR(8,1,1,1)           /-1/
+*     l=8 #=1 +
+      data (JKVANT(8,1,2,i),i=1,9)    / 0, 4, 8,12,16,20,24,28,32/
+c     data (SENIOR(8,1,2,i),i=1,9)    / 0, 2, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(8,1,2,i),i=1,9)    /-1,-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=8 #=2 +
+      data  JKVANT(9,0,0,1)           / 0/
+c     data  SENIOR(9,0,0,1)           / 0/
+      data  SENIOR(9,0,0,1)           /-1/
+*     l=9 #=0 -
+      data  JKVANT(9,0,1,1)           /17/
+c     data  SENIOR(9,0,1,1)           / 1/
+      data  SENIOR(9,0,1,1)           /-1/
+*     l=9 #=1 -
+      data (JKVANT(9,0,2,i),i=1,9)    / 0, 4, 8,12,16,20,24,28,32/
+c     data (SENIOR(9,0,2,i),i=1,9)    / 0, 2, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(9,0,2,i),i=1,9)    /-1,-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=9 #=2 -
+      data  JKVANT(9,1,0,1)           / 0/
+c     data  SENIOR(9,1,0,1)           / 0/
+      data  SENIOR(9,1,0,1)           /-1/
+*     l=9 #=0 +
+      data  JKVANT(9,1,1,1)           /19/
+c     data  SENIOR(9,1,1,1)           / 1/
+      data  SENIOR(9,1,1,1)           /-1/
+*     l=9 #=1 +
+      data (JKVANT(9,1,2,i),i=1,10)   / 0, 4, 8,12,16,20,24,28,32,36/
+c     data (SENIOR(9,1,2,i),i=1,10)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(9,1,2,i),i=1,10)   /-1,-1,-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=9 #=2 +
+      data  JKVANT(10,0,0,1)          / 0/
+c     data  SENIOR(10,0,0,1)          / 0/
+      data  SENIOR(10,0,0,1)          /-1/
+*     l=10 #=0 -
+      data  JKVANT(10,0,1,1)          /19/
+c     data  SENIOR(10,0,1,1)          / 1/
+      data  SENIOR(10,0,1,1)          /-1/
+*     l=10 #=1 -
+      data (JKVANT(10,0,2,i),i=1,10)   / 0, 4, 8,12,16,20,24,28,32,36/
+c     data (SENIOR(10,0,2,i),i=1,10)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2/
+      data (SENIOR(10,0,2,i),i=1,10)   /-1,-1,-1,-1,-1,-1,-1,-1,-1,-1/
+*     l=10 #=2 -
+      data  JKVANT(10,1,0,1)          / 0/
+c     data  SENIOR(10,1,0,1)          / 0/
+      data  SENIOR(10,1,0,1)          /-1/
+*     l=10 #=0 +
+      data  JKVANT(10,1,1,1)          /21/
+c     data  SENIOR(10,1,1,1)          / 1/
+      data  SENIOR(10,1,1,1)          /-1/
+*     l=10 #=1 +
+      data (JKVANT(10,1,2,i),i=1,11)   / 0, 4, 8,12,16,20,24,28,32,36,
+     :                                  40/
+c     data (SENIOR(10,1,2,i),i=1,11)   / 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+c    :                                   2/
+      data (SENIOR(10,1,2,i),i=1,11)   /-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 
+     :                                  -1/
+*     l=10 #=2 +

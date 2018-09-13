@@ -1,0 +1,126 @@
+         General Relativistic Atomic Structure Package -- GRASP2K_v1_1
+
+	                COPYRIGHT  2012
+
+This package is a new version of GRASP2K by
+P. Jonsson, X. He, C. Froese Fischer, and I.P. Grant
+Computer Physics Communication, 177, 597-622 (2007)
+
+This package in turn, is an extension and modification of GRASP92 by
+Farid Parpia, Charlotte Froese Fischer, and Ian Grant.
+Computer Physics Communication, 94, 249-271 (1996)
+
+Modifications in the new version include:
+1. The njgraf library module has been replaced by the librand angular package 
+   developed by G. Gaigalas
+2. Coefficients of fractional parentage have been extended to j = 9/2
+3. A new program jj2lsj reports composition of the wave function in LS-coupling
+4. The program rlevels has been modified to report the CSF with the
+   largest coefficient in an LSJ expansion
+5. The bioscl2 and bioscl3 programs now produce a file of transition data
+   with one record for each transition. States are identified by the total
+   energy and a label of the CSF with the largest coefficient in an LSJ
+   expansion
+6. Adaptation to 64-bit Linux systems
+
+Development performed by:
+   Jacek Bieron              email: bieron@if.uj.edu.pl
+   Charlotte Froese Fischer  email: charlotte.fischer@nist.gov
+   Gediminas Gaigalas        email: gaigalas@itpa.lt
+   Per Jonsson               email: per.jonsson@mah.se
+   Ian Grant                 email: iangrant15@btinternet.com
+
+Other Collaborators:
+   The Computational Atomic Structure Group
+
+                      ACKNOWLEDGEMENTS
+
+This work was supported by the Chemical Sciences, Geosciences and
+Biosciences Division, Office of Basic Energy Sciences, Office of 
+Science, U.S. Department of Energy, the Swedish Research Council, 
+the Visby program of the Swedish Institute, the Polish Ministry of
+Science and Higher Education (MNiSW) in the framework of the project
+No.~N~N202~014140, the European Regional Development Fund in the
+framework of the Polish Innovation Economy Operational Program
+(contract no. POIG.02.01.00-12-023/08).
+
+
+                       INSTALLATION
+
+The package requires several environment variables to be correctly
+initialized by running the shell script as described below. One such 
+variable is the ${GRASP} directory for compiled code.
+
+To install the package for gfortran follow the steps 1-3 below.
+Similar procedure applies to ifort and pgf (portland).
+
+1. Edit the shell scrip make-environment_gfort and set the path to the 
+   installation directory. The changes should be done on line 12 in the
+   shell script.
+
+2. Run the shell script by issuing the command:
+
+   source make-environment_gfort 
+
+3. To compile go to the src directory and give the command:
+
+   make
+
+4. The binaries will be compiled in the grasp2K bin directory
+
+5. The libraries will be compiled in the grasp2K lib directory
+
+Examples of the various options that have been used on different
+architectures are given in the separate file, READ_SETENV
+
+
+                          NOTES
+
+1. The jjgen program can not be compiled with the ifort compiler. 
+   The Makefile for the jjgen program uses gfortran by default!
+
+2. Compilation often depends on system architecture, operating system
+   release, compiler version, version and structure of system libraries.
+   We recommend options -zero -save for all compilers.
+   In some cases option -static or its equivalent should be used.
+3.
+   Optimisation with level -O1 results in considerably faster code than
+   level -O0. Higher levels ( -O2 -O3 ) are only marginally faster, and
+   in some cases resulted in less stable rscf_mpi code, therefore they
+   should be used with caution.
+
+
+                      INSTALLATION MPI
+
+The installation of the MPI codes depends on the computer system. MPI libraries need to be installed.
+In addition the shell script make-environment_gfort (or other compiler version) may need to be adapted to the computer system(s) architecture(s).
+
+
+                  RUNNING EXAMPLES SCRIPT
+
+To run the examples script go to the subdirectory examples and run the command:
+
+./sh_grasp2K_ex
+
+As a consistency check the output should be compared with the files in the 
+output directory.
+
+
+                          MANUAL
+
+There is a users manual in pdf in the manual directory
+To run the first scripts in the manual go to the subdirectory manual/examples1
+and issue the command:   
+
+./sh_grasp2K_ex1
+
+As a consistency check the output should be compared with the files in the 
+output1 directory.
+
+
+NOTE!! the scripts requires that the environment variable ${GRASP} has been set.
+Thus, before running the scripts please make sure that you have run the command:
+
+source make-environment_gfort 
+
+or a similar command for other compilers

@@ -1,0 +1,16 @@
+
+!     Grasp2k parameter file
+!     See Manual page 31 for definitions and dependencies
+
+      integer KEYORB
+      integer NNNP, NNN1, NNNW, NNNWM1, NNNWM2, NNNWP, NNNQN, NNNTJV
+
+      parameter (KEYORB = 215)
+      parameter (NNNP = 590)
+      parameter (NNN1 = 600)
+      parameter (NNNW = 214)
+      parameter (NNNWM1 = 213)
+      parameter (NNNWM2 = 212)
+      parameter (NNNWP = 54)
+      parameter (NNNQN = 10)
+      parameter (NNNTJV = 10)

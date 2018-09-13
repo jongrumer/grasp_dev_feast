@@ -1,0 +1,24 @@
+Atomic number:
+    42.00000000000000     
+Mass number (integer) :
+    96.00000000000000     
+Fermi distribution parameter a:
+   0.5233875553104315     
+Fermi distribution parameter c:
+    5.091933039102283     
+Mass of nucleus (in amu):
+    95.87703267564146     
+Nuclear spin (I) (in units of h / 2 pi):
+    1.000000000000000     
+Nuclear dipole moment (in nuclear magnetons):
+    1.000000000000000     
+Nuclear quadrupole moment (in barns):
+    1.000000000000000     
+First grid point - RNT
+    1.d-8
+Step size - H
+    1.d-2
+Unknown - HP
+    0.d0
+Number of grid points - N
+    5000

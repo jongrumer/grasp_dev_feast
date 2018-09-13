@@ -1,0 +1,775 @@
+Current directory: bd
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/bd'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/graspBD.o' has modification time 1.2e+03 s in the future
+make[1]: `/up/perand/kod/grasp2Kdev_intel/lib/graspBD.o' is up to date.
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/bd'
+....Leaving: bd
+
+
+Current directory: dvdrc
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/dvdrc'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/libdvdson.a' has modification time 1.2e+03 s in the future
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dvdson.f -o dvdson.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large iniest.f -o iniest.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large gdvd.f -o gdvd.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/libdvdson.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/libdvdson.a dvdson.o iniest.o gdvd.o
+r - dvdson.o
+r - iniest.o
+r - gdvd.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/libdvdson.a
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/dvdrc'
+....Leaving: dvdrc
+
+
+Current directory: njgraf
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/njgraf'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/libnjgraf.a' has modification time 1.2e+03 s in the future
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large bubble.f -o bubble.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large cut1l.f -o cut1l.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large diagrm.f -o diagrm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large lolpop.f -o lolpop.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large otherj.f -o otherj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large printj.f -o printj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large settab.f -o settab.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large triang.f -o triang.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large change.f -o change.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large cut2l.f -o cut2l.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dracah.f -o dracah.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large neibor.f -o neibor.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large phase.f -o phase.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large rdiag.f -o rdiag.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large sprate.f -o sprate.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large var.f -o var.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large chklp1.f -o chklp1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large cutnl.f -o cutnl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large gensum.f -o gensum.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large njgraf.f -o njgraf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large phase2.f -o phase2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large search.f -o search.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large square.f -o square.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large way.f -o way.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large chvar.f -o chvar.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large delta.f -o delta.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large intab.f -o intab.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large ordtri.f -o ordtri.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large polygn.f -o polygn.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large setdm.f -o setdm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large trdel.f -o trdel.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large zero.f -o zero.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/libnjgraf.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/libnjgraf.a bubble.o  cut1l.o diagrm.o lolpop.o otherj.o  printj.o  settab.o  triang.o change.o  cut2l.o dracah.o neibor.o phase.o   rdiag.o   sprate.o  var.o chklp1.o  cutnl.o gensum.o njgraf.o phase2.o  search.o  square.o  way.o chvar.o   delta.o intab.o  ordtri.o polygn.o  setdm.o   trdel.o   zero.o 
+r - bubble.o
+r - cut1l.o
+r - diagrm.o
+r - lolpop.o
+r - otherj.o
+r - printj.o
+r - settab.o
+r - triang.o
+r - change.o
+r - cut2l.o
+r - dracah.o
+r - neibor.o
+r - phase.o
+r - rdiag.o
+r - sprate.o
+r - var.o
+r - chklp1.o
+r - cutnl.o
+r - gensum.o
+r - njgraf.o
+r - phase2.o
+r - search.o
+r - square.o
+r - way.o
+r - chvar.o
+r - delta.o
+r - intab.o
+r - ordtri.o
+r - polygn.o
+r - setdm.o
+r - trdel.o
+r - zero.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/libnjgraf.a
+rm -f *.o
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/njgraf'
+....Leaving: njgraf
+
+
+Current directory: lib92
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lib92'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/lib92.a' has modification time 1.2e+03 s in the future
+cc -c  -I /up/perand/kod/grasp2Kdev_intel/src/lib/def func.c -o func.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def length.f -o length.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def alloc_LINUX.f -o alloc_LINUX.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def dalloc_LINUX.f -o dalloc_LINUX.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setmc.f -o setmc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def alcbuf.f -o alcbuf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def arctan.f -o arctan.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def calen.f -o calen.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cfp.f -o cfp.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cfp3.f -o cfp3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cfp5.f -o cfp5.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cfp7.f -o cfp7.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cfpd.f -o cfpd.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cgamma.f -o cgamma.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def clrx.f -o clrx.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def convrt.f -o convrt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def convrt2.f -o convrt2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cor.f -o cor.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cord.f -o cord.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def count.f -o count.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cre.f -o cre.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def dcbsrw.f -o dcbsrw.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def dpbdt.f -o dpbdt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def draw.f -o draw.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def engout.f -o engout.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def es.f -o es.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def factt.f -o factt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def fixj.f -o fixj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getmix.f -o getmix.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getmixa.f -o getmixa.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getmixc.f -o getmixc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getrsl.f -o getrsl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getyn.f -o getyn.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ichop.f -o ichop.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def interp.f -o interp.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def intrpq.f -o intrpq.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def iq.f -o iq.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def irow1.f -o irow1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ispar.f -o ispar.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itjpo.f -o itjpo.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itrig.f -o itrig.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def iunpck.f -o iunpck.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def jcup.f -o jcup.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def jqs.f -o jqs.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def knj.f -o knj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ldigit.f -o ldigit.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcsl.f -o lodcsl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodiso.f -o lodiso.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodplt.f -o lodplt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodrwf.f -o lodrwf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ltab.f -o ltab.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def modj23.f -o modj23.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def mumdad.f -o mumdad.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def nucpot.f -o nucpot.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ocon.f -o ocon.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def openfl.f -o openfl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def orthsc.f -o orthsc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def outcsf.f -o outcsf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def pack.f -o pack.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def parsjl.f -o parsjl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def posnfl.f -o posnfl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def prsrcn.f -o prsrcn.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def prsrsl.f -o prsrsl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def quad.f -o quad.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def radgrd.f -o radgrd.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ralc2d.f -o ralc2d.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ralloc.f -o ralloc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rint.f -o rint.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rinti.f -o rinti.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rkco.f -o rkco.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def screen.f -o screen.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcon.f -o setcon.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcsl.f -o setcsl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcsla.f -o setcsla.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcsll.f -o setcsll.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setiso.f -o setiso.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setj.f -o setj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setpot.f -o setpot.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setqic.f -o setqic.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setqna.f -o setqna.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setrwf.f -o setrwf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setrwfa.f -o setrwfa.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def skrc.f -o skrc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def slater.f -o slater.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def speak.f -o speak.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def start.f -o start.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def timer.f -o timer.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def tnsrjj.f -o tnsrjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def vijout.f -o vijout.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def wghtd5.f -o wghtd5.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def yzk.f -o yzk.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def daxpyi.f -o daxpyi.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ddoti.f -o ddoti.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def dinit.f -o dinit.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def posfile.f -o posfile.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def backwdfile.f -o backwdfile.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def forwdfile.f -o forwdfile.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def items.f -o items.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodstate.f -o lodstate.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcsh.f -o setcsh.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcsh.f -o lodcsh.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcsh2.f -o lodcsh2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setcsf.f -o setcsf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcsf.f -o lodcsf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def spicmv.f -o spicmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def chkplt.f -o chkplt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cslh.f -o cslh.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def dmerge.f -o dmerge.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def icopy.f -o icopy.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def iniest2.f -o iniest2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def spicmv2.f -o spicmv2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def starttime.f -o starttime.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def stoptime.f -o stoptime.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ichkq1.f -o ichkq1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ichkq2.f -o ichkq2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getmixblka.f -o getmixblka.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def getmixblkc.f -o getmixblkc.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcslo.f -o lodcslo.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def iniest3.f -o iniest3.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/lib92.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/lib92.a func.o length.o alloc_LINUX.o dalloc_LINUX.o setmc.o alcbuf.o  arctan.o  calen.o   cfp.o     cfp3.o   cfp5.o     cfp7.o cfpd.o    cgamma.o  clrx.o    convrt.o  convrt2.o cor.o     cord.o count.o cre.o     dcbsrw.o  dpbdt.o   draw.o    engout.o      es.o factt.o   fixj.o    getmix.o  getmixa.o getmixc.o getrsl.o getyn.o ichop.o   interp.o intrpq.o  iq.o      irow1.o   ispar.o   itjpo.o itrig.o   iunpck.o  jcup.o    jqs.o     knj.o ldigit.o    lodcsl.o lodiso.o  lodplt.o  lodrwf.o ltab.o    modj23.o  mumdad.o nucpot.o ocon.o openfl.o  orthsc.o  outcsf.o  pack.o    parsjl.o   posnfl.o prsrcn.o  prsrsl.o  quad.o    radgrd.o ralc2d.o  ralloc.o   rint.o rinti.o   rkco.o screen.o  setcon.o  setcsl.o  setcsla.o setcsll.o setiso.o  setj.o    setpot.o  setqic.o setqna.o  setrwf.o setrwfa.o skrc.o    slater.o speak.o   start.o   timer.o   tnsrjj.o vijout.o wghtd5.o  yzk.o daxpyi.o  ddoti.o   dinit.o posfile.o backwdfile.o forwdfile.o items.o lodstate.o setcsh.o  lodcsh.o  lodcsh2.o setcsf.o lodcsf.o spicmv.o chkplt.o cslh.o dmerge.o icopy.o iniest2.o spicmv2.o starttime.o stoptime.o ichkq1.o ichkq2.o getmixblka.o getmixblkc.o lodcslo.o iniest3.o 
+r - func.o
+r - length.o
+r - alloc_LINUX.o
+r - dalloc_LINUX.o
+r - setmc.o
+r - alcbuf.o
+r - arctan.o
+r - calen.o
+r - cfp.o
+r - cfp3.o
+r - cfp5.o
+r - cfp7.o
+r - cfpd.o
+r - cgamma.o
+r - clrx.o
+r - convrt.o
+r - convrt2.o
+r - cor.o
+r - cord.o
+r - count.o
+r - cre.o
+r - dcbsrw.o
+r - dpbdt.o
+r - draw.o
+r - engout.o
+r - es.o
+r - factt.o
+r - fixj.o
+r - getmix.o
+r - getmixa.o
+r - getmixc.o
+r - getrsl.o
+r - getyn.o
+r - ichop.o
+r - interp.o
+r - intrpq.o
+r - iq.o
+r - irow1.o
+r - ispar.o
+r - itjpo.o
+r - itrig.o
+r - iunpck.o
+r - jcup.o
+r - jqs.o
+r - knj.o
+r - ldigit.o
+r - lodcsl.o
+r - lodiso.o
+r - lodplt.o
+r - lodrwf.o
+r - ltab.o
+r - modj23.o
+r - mumdad.o
+r - nucpot.o
+r - ocon.o
+r - openfl.o
+r - orthsc.o
+r - outcsf.o
+r - pack.o
+r - parsjl.o
+r - posnfl.o
+r - prsrcn.o
+r - prsrsl.o
+r - quad.o
+r - radgrd.o
+r - ralc2d.o
+r - ralloc.o
+r - rint.o
+r - rinti.o
+r - rkco.o
+r - screen.o
+r - setcon.o
+r - setcsl.o
+r - setcsla.o
+r - setcsll.o
+r - setiso.o
+r - setj.o
+r - setpot.o
+r - setqic.o
+r - setqna.o
+r - setrwf.o
+r - setrwfa.o
+r - skrc.o
+r - slater.o
+r - speak.o
+r - start.o
+r - timer.o
+r - tnsrjj.o
+r - vijout.o
+r - wghtd5.o
+r - yzk.o
+r - daxpyi.o
+r - ddoti.o
+r - dinit.o
+r - posfile.o
+r - backwdfile.o
+r - forwdfile.o
+r - items.o
+r - lodstate.o
+r - setcsh.o
+r - lodcsh.o
+r - lodcsh2.o
+r - setcsf.o
+r - lodcsf.o
+r - spicmv.o
+r - chkplt.o
+r - cslh.o
+r - dmerge.o
+r - icopy.o
+r - iniest2.o
+r - spicmv2.o
+r - starttime.o
+r - stoptime.o
+r - ichkq1.o
+r - ichkq2.o
+r - getmixblka.o
+r - getmixblkc.o
+r - lodcslo.o
+r - iniest3.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/lib92.a
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lib92'
+....Leaving: lib92
+
+
+Current directory: lapackd
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lapackd'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/liblapackd.a' has modification time 1.2e+03 s in the future
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlae2.f -o dlae2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlaebz.f -o dlaebz.o
+dlaebz.f(413): remark #5140: Unrecognized directive
+CDIR$          NEXTSCALAR
+-------------------------^
+dlaebz.f(415): remark #5140: Unrecognized directive
+CDIR$          NEXT SCALAR
+--------------------------^
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlaev2.f -o dlaev2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlagtf.f -o dlagtf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlagts.f -o dlagts.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlansp.f -o dlansp.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlanst.f -o dlanst.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlapy2.f -o dlapy2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlarf.f -o dlarf.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlarfg.f -o dlarfg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlarnv.f -o dlarnv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlartg.f -o dlartg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlaruv.f -o dlaruv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlascl.f -o dlascl.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlaset.f -o dlaset.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlasr.f -o dlasr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlasrt.f -o dlasrt.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dlassq.f -o dlassq.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dopgtr.f -o dopgtr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dopmtr.f -o dopmtr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dorg2l.f -o dorg2l.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dorg2r.f -o dorg2r.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dspevx.f -o dspevx.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsptrd.f -o dsptrd.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dstebz.f -o dstebz.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dstein.f -o dstein.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsteqr.f -o dsteqr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsterf.f -o dsterf.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/liblapackd.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/liblapackd.a dlae2.o   dlaebz.o  dlaev2.o  dlagtf.o  dlagts.o  dlansp.o  dlanst.o  dlapy2.o dlarf.o   dlarfg.o  dlarnv.o  dlartg.o  dlaruv.o  dlascl.o  dlaset.o  dlasr.o dlasrt.o  dlassq.o  dopgtr.o  dopmtr.o  dorg2l.o  dorg2r.o  dspevx.o  dsptrd.o dstebz.o  dstein.o  dsteqr.o  dsterf.o
+r - dlae2.o
+r - dlaebz.o
+r - dlaev2.o
+r - dlagtf.o
+r - dlagts.o
+r - dlansp.o
+r - dlanst.o
+r - dlapy2.o
+r - dlarf.o
+r - dlarfg.o
+r - dlarnv.o
+r - dlartg.o
+r - dlaruv.o
+r - dlascl.o
+r - dlaset.o
+r - dlasr.o
+r - dlasrt.o
+r - dlassq.o
+r - dopgtr.o
+r - dopmtr.o
+r - dorg2l.o
+r - dorg2r.o
+r - dspevx.o
+r - dsptrd.o
+r - dstebz.o
+r - dstein.o
+r - dsteqr.o
+r - dsterf.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/liblapackd.a
+rm -f *.o
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lapackd'
+....Leaving: lapackd
+
+
+Current directory: lapacku
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lapacku'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/liblapacku.a' has modification time 1.1e+03 s in the future
+ifort -c -O0 xerbla.f -o xerbla.o
+ifort -c -O0 slamch.f -o slamch.o
+ifort -c -O0 dlamc1.f -o dlamc1.o
+ifort -c -O0 dlamc2.f -o dlamc2.o
+ifort -c -O0 dlamc3.f -o dlamc3.o
+ifort -c -O0 dlamc4.f -o dlamc4.o
+ifort -c -O0 dlamc5.f -o dlamc5.o
+ifort -c -O0 dlamch.f -o dlamch.o
+ifort -c -O0 ilaenv.f -o ilaenv.o
+ifort -c -O0 lsame.f -o lsame.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/liblapacku.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/liblapacku.a xerbla.o slamch.o dlamc1.o  dlamc2.o  dlamc3.o  dlamc4.o  dlamc5.o  dlamch.o  ilaenv.o  lsame.o
+r - xerbla.o
+r - slamch.o
+r - dlamc1.o
+r - dlamc2.o
+r - dlamc3.o
+r - dlamc4.o
+r - dlamc5.o
+r - dlamch.o
+r - ilaenv.o
+r - lsame.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/liblapacku.a
+rm -f *.o
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/lapacku'
+....Leaving: lapacku
+
+
+Current directory: blas
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/blas'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/libblas.a' has modification time 1.2e+03 s in the future
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dasum.f -o dasum.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large daxpy.f -o daxpy.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dcopy.f -o dcopy.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large ddot.f -o ddot.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dgbmv.f -o dgbmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dgemm.f -o dgemm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dgemv.f -o dgemv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dger.f -o dger.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dmach.f -o dmach.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dnrm2.f -o dnrm2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large drot.f -o drot.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large drotg.f -o drotg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsbmv.f -o dsbmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dscal.f -o dscal.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dspmv.f -o dspmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dspr.f -o dspr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dspr2.f -o dspr2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dswap.f -o dswap.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsymm.f -o dsymm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsymv.f -o dsymv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsyr.f -o dsyr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsyr2.f -o dsyr2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsyr2k.f -o dsyr2k.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsyrk.f -o dsyrk.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtbmv.f -o dtbmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtbsv.f -o dtbsv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtpmv.f -o dtpmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtpsv.f -o dtpsv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtrmm.f -o dtrmm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtrmv.f -o dtrmv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtrsm.f -o dtrsm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dtrsv.f -o dtrsv.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large gather.f -o gather.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large idamax.f -o idamax.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large iinit.f -o iinit.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large scatter.f -o scatter.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dgthr.f -o dgthr.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large droti.f -o droti.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large dsctr.f -o dsctr.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/libblas.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/libblas.a dasum.o    daxpy.o    dcopy.o    ddot.o     dgbmv.o    dgemm.o    dgemv.o dger.o     dmach.o    dnrm2.o    drot.o     drotg.o    dsbmv.o    dscal.o dspmv.o    dspr.o     dspr2.o    dswap.o    dsymm.o    dsymv.o    dsyr.o dsyr2.o    dsyr2k.o   dsyrk.o    dtbmv.o    dtbsv.o    dtpmv.o    dtpsv.o dtrmm.o    dtrmv.o    dtrsm.o    dtrsv.o    gather.o   idamax.o   iinit.o scatter.o  iinit.o    dgthr.o    droti.o    dsctr.o 
+r - dasum.o
+r - daxpy.o
+r - dcopy.o
+r - ddot.o
+r - dgbmv.o
+r - dgemm.o
+r - dgemv.o
+r - dger.o
+r - dmach.o
+r - dnrm2.o
+r - drot.o
+r - drotg.o
+r - dsbmv.o
+r - dscal.o
+r - dspmv.o
+r - dspr.o
+r - dspr2.o
+r - dswap.o
+r - dsymm.o
+r - dsymv.o
+r - dsyr.o
+r - dsyr2.o
+r - dsyr2k.o
+r - dsyrk.o
+r - dtbmv.o
+r - dtbsv.o
+r - dtpmv.o
+r - dtpsv.o
+r - dtrmm.o
+r - dtrmv.o
+r - dtrsm.o
+r - dtrsv.o
+r - gather.o
+r - idamax.o
+r - iinit.o
+r - scatter.o
+r - iinit.o
+r - dgthr.o
+r - droti.o
+r - dsctr.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/libblas.a
+rm -f *.o
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/blas'
+....Leaving: blas
+
+
+Current directory: mpi
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/mpi'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/libmpiu.a' has modification time 1.1e+03 s in the future
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cpath_LINUX.f -o cpath_LINUX.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cslhmpi.f -o cslhmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def iniestmpi.f -o iniestmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodcslmpi.f -o lodcslmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def lodrwfmpi.f -o lodrwfmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def mpiu.f -o mpiu.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setisompi.f -o setisompi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def setrwfmpi.f -o setrwfmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def spicmvmpi.f -o spicmvmpi.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sys_chdir_LINUX.f -o sys_chdir_LINUX.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sys_getwd_LINUX.f -o sys_getwd_LINUX.o
+mpif90 -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sys_mkdir_LINUX.f -o sys_mkdir_LINUX.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/libmpiu.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/libmpiu.a cpath_LINUX.o cslhmpi.o iniestmpi.o lodcslmpi.o lodrwfmpi.o mpiu.o setisompi.o setrwfmpi.o spicmvmpi.o sys_chdir_LINUX.o sys_getwd_LINUX.o sys_mkdir_LINUX.o
+r - cpath_LINUX.o
+r - cslhmpi.o
+r - iniestmpi.o
+r - lodcslmpi.o
+r - lodrwfmpi.o
+r - mpiu.o
+r - setisompi.o
+r - setrwfmpi.o
+r - spicmvmpi.o
+r - sys_chdir_LINUX.o
+r - sys_getwd_LINUX.o
+r - sys_mkdir_LINUX.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/libmpiu.a
+rm -f *.o
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/mpi'
+....Leaving: mpi
+
+
+Current directory: librang
+make[1]: Entering directory `/up/perand/kod/grasp2Kdev_intel/src/lib/librang'
+make[1]: Warning: File `/up/perand/kod/grasp2Kdev_intel/lib/librang.a' has modification time 1.1e+03 s in the future
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def a1jj.f -o a1jj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def awp1.f -o awp1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def awp1jjg.f -o awp1jjg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def c0t5s.f -o c0t5s.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def c1e0sm.f -o c1e0sm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def c1e1sm.f -o c1e1sm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def cle0sm.f -o cle0sm.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def coulomb.f -o coulomb.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def diaga1.f -o diaga1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def diaga2.f -o diaga2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def diaga3.f -o diaga3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def diaga4.f -o diaga4.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def diaga5.f -o diaga5.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def eile.f -o eile.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el1.f -o el1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el2.f -o el2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el3.f -o el3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el31.f -o el31.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el32.f -o el32.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el33.f -o el33.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el4.f -o el4.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el41.f -o el41.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el5.f -o el5.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el51.f -o el51.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el52.f -o el52.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def el53.f -o el53.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg1112.f -o gg1112.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg1122.f -o gg1122.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg1222.f -o gg1222.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg1233.f -o gg1233.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg1234.f -o gg1234.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def gg12.f -o gg12.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def glcons.f -o glcons.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Gracah1.f -o Gracah1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itjj2.f -o itjj2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itjj3.f -o itjj3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itjj.f -o itjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def itrexg.f -o itrexg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ittk.f -o ittk.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ixjtik.f -o ixjtik.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def izas1.f -o izas1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def jfaze.f -o jfaze.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def jthn.f -o jthn.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def mes.f -o mes.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Nine0.f -o Nine0.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Nine.f -o Nine.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def nmtejj.f -o nmtejj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def onescalar.f -o onescalar.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def onescalar1.f -o onescalar1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def onescalar2.f -o onescalar2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def oneparticlejj.f -o oneparticlejj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def oneparticlejj1.f -o oneparticlejj1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def oneparticlejj2.f -o oneparticlejj2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def perko1.f -o perko1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def perko2.f -o perko2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def reco.f -o reco.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def recoonescalar.f -o recoonescalar.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def reco2.f -o reco2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rec3.f -o rec3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def reco3.f -o reco3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def reco4.f -o reco4.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def recop00.f -o recop00.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def recop1.f -o recop1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def recop2.f -o recop2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ribjj.f -o ribjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmeajj11.f -o Rmeajj11.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmeajj9.f -o Rmeajj9.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmeajj.f -o Rmeajj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmew1jj.f -o Rmew1jj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmew3jj.f -o Rmew3jj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmew5jj.f -o Rmew5jj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmew7bjj.f -o Rmew7bjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rmew7jj.f -o Rmew7jj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rumtjj.f -o rumtjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def Rwjj.f -o Rwjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj1.f -o sixj1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj2.f -o sixj2.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj35.f -o sixj35.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj3.f -o sixj3.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj4.f -o sixj4.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj5.f -o sixj5.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def sixj.f -o sixj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def suwjj.f -o suwjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def termjj.f -o termjj.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def rkco_gg.f -o rkco_gg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def w1jjg.f -o w1jjg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def wap1.f -o wap1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def wap1jjg.f -o wap1jjg.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def wj1.f -o wj1.o
+ifort -c -O1 -save -zero -align all -W0 -mcmodel=large -I /up/perand/kod/grasp2Kdev_intel/src/lib/def ww1.f -o ww1.o
+ Building  /up/perand/kod/grasp2Kdev_intel/lib/librang.a
+ar -curvs /up/perand/kod/grasp2Kdev_intel/lib/librang.a a1jj.o awp1.o awp1jjg.o c0t5s.o c1e0sm.o c1e1sm.o cle0sm.o coulomb.o diaga1.o diaga2.o diaga3.o diaga4.o diaga5.o eile.o el1.o el2.o el3.o el31.o el32.o el33.o el4.o el41.o el5.o el51.o el52.o el53.o gg1112.o gg1122.o gg1222.o gg1233.o gg1234.o gg12.o glcons.o Gracah1.o itjj2.o itjj3.o itjj.o itrexg.o ittk.o ixjtik.o izas1.o jfaze.o jthn.o mes.o Nine0.o Nine.o nmtejj.o onescalar.o onescalar1.o onescalar2.o oneparticlejj.o oneparticlejj1.o oneparticlejj2.o perko1.o perko2.o reco.o recoonescalar.o reco2.o rec3.o reco3.o reco4.o recop00.o recop1.o recop2.o ribjj.o Rmeajj11.o Rmeajj9.o Rmeajj.o Rmew1jj.o Rmew3jj.o Rmew5jj.o Rmew7bjj.o Rmew7jj.o rumtjj.o Rwjj.o sixj1.o sixj2.o sixj35.o sixj3.o sixj4.o sixj5.o sixj.o suwjj.o termjj.o rkco_gg.o w1jjg.o wap1.o wap1jjg.o wj1.o ww1.o 
+r - a1jj.o
+r - awp1.o
+r - awp1jjg.o
+r - c0t5s.o
+r - c1e0sm.o
+r - c1e1sm.o
+r - cle0sm.o
+r - coulomb.o
+r - diaga1.o
+r - diaga2.o
+r - diaga3.o
+r - diaga4.o
+r - diaga5.o
+r - eile.o
+r - el1.o
+r - el2.o
+r - el3.o
+r - el31.o
+r - el32.o
+r - el33.o
+r - el4.o
+r - el41.o
+r - el5.o
+r - el51.o
+r - el52.o
+r - el53.o
+r - gg1112.o
+r - gg1122.o
+r - gg1222.o
+r - gg1233.o
+r - gg1234.o
+r - gg12.o
+r - glcons.o
+r - Gracah1.o
+r - itjj2.o
+r - itjj3.o
+r - itjj.o
+r - itrexg.o
+r - ittk.o
+r - ixjtik.o
+r - izas1.o
+r - jfaze.o
+r - jthn.o
+r - mes.o
+r - Nine0.o
+r - Nine.o
+r - nmtejj.o
+r - onescalar.o
+r - onescalar1.o
+r - onescalar2.o
+r - oneparticlejj.o
+r - oneparticlejj1.o
+r - oneparticlejj2.o
+r - perko1.o
+r - perko2.o
+r - reco.o
+r - recoonescalar.o
+r - reco2.o
+r - rec3.o
+r - reco3.o
+r - reco4.o
+r - recop00.o
+r - recop1.o
+r - recop2.o
+r - ribjj.o
+r - Rmeajj11.o
+r - Rmeajj9.o
+r - Rmeajj.o
+r - Rmew1jj.o
+r - Rmew3jj.o
+r - Rmew5jj.o
+r - Rmew7bjj.o
+r - Rmew7jj.o
+r - rumtjj.o
+r - Rwjj.o
+r - sixj1.o
+r - sixj2.o
+r - sixj35.o
+r - sixj3.o
+r - sixj4.o
+r - sixj5.o
+r - sixj.o
+r - suwjj.o
+r - termjj.o
+r - rkco_gg.o
+r - w1jjg.o
+r - wap1.o
+r - wap1jjg.o
+r - wj1.o
+r - ww1.o
+ranlib /up/perand/kod/grasp2Kdev_intel/lib/librang.a
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/up/perand/kod/grasp2Kdev_intel/src/lib/librang'
+....Leaving: librang
+
+

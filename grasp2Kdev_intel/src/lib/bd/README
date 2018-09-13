@@ -1,0 +1,3 @@
+Update: 98-10-16
+lapack_d2s.cld and lapack_d2s.map are here for CRAY J90 and T3E at nersc
+where lapack are installed.

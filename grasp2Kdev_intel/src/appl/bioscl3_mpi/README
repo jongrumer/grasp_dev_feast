@@ -1,0 +1,18 @@
+7/30/00
+
+Ideas:
+
+Use MPI_Allreduce in csfm.f to combine contributions to
+ASFA and ASFB
+
+How do you deal with directories???
+
+Notice that startmpi2 sets up a local directory and GOES there!
+
+Could add a permanent directory path to NAME(1) and NAME(2),
+but then how do I form double names??
+NO! Don't put paths there because angular files 
+name1.name2.T are going to reside in the temporary directories!
+
+How about having 2 arrays -- NAME(2) and FULLNAME(2) ???
+Also, I will need to broadcast NAME(2) to all of the nodes!

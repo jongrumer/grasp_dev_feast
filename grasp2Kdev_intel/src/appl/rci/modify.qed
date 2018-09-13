@@ -1,0 +1,47 @@
+The following statements were modified in subroutine QED. The upper are
+original and the lower are present.
+
+1.
+***********************************************
+<       SUBROUTINE QED (jstate,SLFINT)
+---
+>       SUBROUTINE QED (jstate,SLFINT,UCF)
+***********************************************
+
+2.
+***********************************************
+<       POINTER (PNTUCF,UCF(1))
+---
+>       DIMENSION UCF(1)
+> czou  POINTER (PNTUCF,UCF(1))
+***********************************************
+
+3.
+***********************************************
+<       CALL ALLOC (PNTUCF,NW,8)
+---
+> czou     CALL ALLOC (PNTUCF,NW,8)
+***********************************************
+
+4.
+***********************************************
+<          UCF(J) = UCFJ/DBLE (NCF)
+---
+>          UCF(J) = UCFJ
+> c zou    UCF(J) = UCFJ/DBLE (NCF)
+***********************************************
+
+5.
+***********************************************
+<             ZEFF = Z-SCREEN (J,UCF)
+---
+>             ZEFF = Z-SHIELD (J)
+> c           ZEFF = Z-SCREEN (J,UCF)
+***********************************************
+
+6.
+***********************************************
+<       CALL DALLOC (PNTUCF)
+---
+> czou  CALL DALLOC (PNTUCF)
+***********************************************

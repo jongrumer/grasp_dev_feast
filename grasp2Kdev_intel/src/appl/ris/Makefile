@@ -1,0 +1,25 @@
+EXE = ris
+BINDIR = ${GRASP}/bin
+GRASPLIB = ${GRASP}/lib
+GRASPBLOCKD = ${GRASPLIB}/graspBD.o
+BINFILE = $(BINDIR)/$(EXE)
+
+APP_LIBS = ${GRASPBLOCKD} -L${GRASPLIB} ${NEWGRASPLIBS}
+
+APP_OBJ= angdata.o \
+         chkplt.o cxk.o densnew.o gco.o dracah.o getsmd.o \
+         densread.o polint.o rintdens.o \
+         setdbg.o setsum.o ris.o ris_cal.o \
+         smsnew.o strsum.o sigma_1.o sigma_2.o vinti.o getmixblock.o \
+         smsread.o rinti_NMS.o rint_sms2.o rint_sms3.o  snrc.o talk.o
+$(EXE): $(APP_OBJ)
+	$(FC) -o $(BINFILE) $(FC_LD)  $(APP_OBJ) $(APP_LIBS) \
+              -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+.f.o:
+	$(FC) -c $(FC_FLAGS) -I $(GRASP_INCLUDES) $< -o $@
+
+
+clean:
+	-rm -f *.o core 
+

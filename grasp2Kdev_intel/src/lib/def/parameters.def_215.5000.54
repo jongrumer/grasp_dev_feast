@@ -1,0 +1,17 @@
+cb
+cbieron parameters.def definitions
+cb
+      integer KEYORB
+      integer NNNP, NNN1, NNNW, NNNWM1, NNNWM2, NNNWP, NNNQN, NNNTJV
+c
+cb see Manual page 31 for definitions and dependencies
+c
+      parameter (KEYORB = 215)
+      parameter (NNNP = 5000)
+      parameter (NNN1 = 5010)
+      parameter (NNNW = 214)
+      parameter (NNNWM1 = 213)
+      parameter (NNNWM2 = 212)
+      parameter (NNNWP = 54)
+      parameter (NNNQN = 10)
+      parameter (NNNTJV = 10)

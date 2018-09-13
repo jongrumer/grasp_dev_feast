@@ -1,0 +1,119 @@
+***********************************************************************
+      subroutine cpath (startdir, permdir, tmpdir)
+      implicit none
+      character(len=128), intent(out):: permdir, tmpdir, startdir
+
+!      startdir - path where the current node started from.
+!      permdir  - path where node-0 performs serial i/o.
+!      tmpdir   - path where the current node goes to.
+!
+!   This version reads (by node-0) the paths from a disk file under the 
+!   starting directory of the node-0, determine the length and do 
+!   sending/receiving. Only if the paths defined here do not exist will
+!   C functions be called to create them.
+!
+!   Xinghong He  98-10-30
+*>>
+      include 'mpif.h'
+      integer  myid, nprocs, ierr, istat(MPI_STATUS_SIZE)
+      COMMON /mpi/ myid, nprocs, ierr
+      !...locals - be careful when change lenidstring !
+      integer, parameter:: lendisk0 = 128, lenidstring = 3
+      character(len=lendisk0) disk
+      character(len=lenidstring) idstring
+      integer   lendisk, i, len_cwd, iii
+      logical ydisks
+
+!=======================================================================
+!  Open file, read paths and send/receive them. Each node will have 
+!  its preliminary path stored in variable disk. In addition, node-0 
+!  will have the current working dir stored in permdir.
+!=======================================================================
+
+!=======================================================================
+!  Get the current work dir name.
+!=======================================================================
+
+      call sys_getwd (startdir,len_cwd)
+
+!=======================================================================
+      disk = ' '
+
+      if (myid .eq. 0) then
+         inquire(FILE='disks',exist=ydisks)
+         if(ydisks) then
+            open (unit=1001, file='disks', status='old')
+            !...paths for serial i/o, node-0 only
+            read (1001,*) permdir  ! paths for serial i/o, node-0 only
+            read (1001,*) tmpdir   ! tempory for local disk of node-0 
+            !...paths for slaves, read and send; 
+            do i = 1, nprocs - 1
+               read (1001,*) disk
+               call MPI_Send (disk, lendisk0, MPI_CHARACTER, i, i, 
+     &                                MPI_COMM_WORLD, ierr)
+            enddo
+            disk = tmpdir           ! local disk of node-0 
+            close (1001)
+         else
+            permdir = startdir
+            iii = len_trim(startdir) -1 
+            tmpdir = startdir(1:iii) // '/tmp_mpi' // '\0'
+            disk = tmpdir;
+            do i = 1, nprocs - 1
+               call MPI_Send (disk, lendisk0, MPI_CHARACTER, i, i,
+     &                                MPI_COMM_WORLD, ierr)
+            enddo
+         end if
+         iii = len_trim(tmpdir) 
+         call sys_chdir(tmpdir,iii,ierr)
+         if (ierr.ne.0) call sys_mkdir (tmpdir,iii,ierr)
+         if (ierr.ne.0) call exit(1)
+      else 
+         !...slaves receive their local dirs
+         if (nprocs .gt. 1)
+     &   call MPI_Recv (disk, lendisk0, MPI_CHARACTER, 0, myid,
+     &                             MPI_COMM_WORLD, istat, ierr)
+      end if
+      lendisk = len_trim (disk) 
+      call MPI_Barrier(MPI_COMM_WORLD, ierr)
+
+!=======================================================================
+!  Go to local disk - They must have been there.
+!=======================================================================
+      call sys_chdir (disk, lendisk, ierr)
+
+      call MPI_Barrier(MPI_COMM_WORLD, ierr)
+!=======================================================================
+!  Go to sub-dir defined by its identification number. Create it if
+!  not there.
+!=======================================================================
+
+      write (idstring,'(I3.3)') myid
+      disk = disk(1:lendisk-1)//'/'//idstring//'\0'
+      lendisk = len_trim(disk) - 1
+      call sys_chdir (disk, lendisk, ierr)
+      if (ierr .ne. 0) then
+         call sys_mkdir (disk, lendisk,  ierr)
+         if (ierr .ne. 0) then
+            print *, 'Failed to make sub-dir ' // idstring
+            goto 999
+         endif
+         call sys_chdir (disk, lendisk, ierr)  ! try again
+         if (ierr .ne. 0) then
+            print *, 'Failed to go to sub-dir ' // idstring
+            goto 999
+         endif
+      endif
+  999 continue
+
+!=======================================================================
+!  Handle error cases. Since it has to succeed, we invoke stop.
+!=======================================================================
+
+      if (ierr .ne. 0) then
+         print *, 'cpath failed, myid = ', myid
+         stop
+      endif
+      tmpdir = disk(1:lendisk)
+      return
+      end

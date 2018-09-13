@@ -1,0 +1,20 @@
+#
+# I deleted chkplt from the OBJECTS since it is not there
+# xh
+#
+BINDIR  = ${GRASPBIN}
+BINDIR = ../../../bin
+BINFILE = $(BINDIR)/cndens
+FC      = ${GRASPFOR}
+FFLAGS  = ${GRASPOPT}
+
+LIBS    = ${GRASPBLOCKD} -L${GRASPLIB} ${GRASPLIBS}
+
+OBJECTS = cndens.o cutout.o setdbg.o
+
+$(BINFILE) : $(OBJECTS)
+	$(FC) -o $(BINFILE) $(LFLAGS) $(FFLAGS) $(OBJECTS) $(LIBS)
+
+.f.o : 
+	$(FC) -c $(FFLAGS) $*.f
+

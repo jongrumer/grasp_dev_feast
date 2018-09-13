@@ -1,0 +1,98 @@
+Prof. Fischer,
+
+To use the weighted average energy as the criterion of SCF convergence, three subroutines were modified in RSCFVU program.
+
+In subroutine SCF, line 153 was modified,
+*** begin ***********************************************
+<          CALL newco
+---
+>          CALL newco(WTAEV)
+*** end *************************************************
+
+and follwing statement was inserted after line 155,
+*** begin ***********************************************
+>       WTAEV=0.0
+*** end *************************************************
+
+and line 217 was changed,
+*** begin ***********************************************
+<             CALL newco
+---
+>             CALL newco(WTAEV)
+*** end *************************************************
+
+and follwing statements was inserted after line 218,
+*** begin ***********************************************
+>          IF(ABS(WTAEV-WTAEV0).LT.1.0D-8) CONVG=.T.
+>          WTAEV0=WTAEV
+*** end *************************************************
+
+
+In subroutine IMPROV, line 104 was changed,
+*** begin ***********************************************
+<                CALL newco
+---
+>                CALL newco(WTAEV)
+*** end *************************************************
+
+
+In subroutine NEWCO, line 3 was changed
+*** begin ***********************************************
+<       SUBROUTINE newco
+---
+>       SUBROUTINE newco(SUM)
+*** end *************************************************
+
+Here are the test results. The test case is the AlII valence correlation calculation.
+
+-----------------------------------------------------------
+                IC                         Allowed
+          DE   A_C     A_B          DE      gf_C     gf_B
+-----------------------------------------------------------
+Expt  37454      3280(100)         59850       1.74(27)
+                 3330(117)                     1.20(6)
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Method: Valence, seperate core,
+    initial: 1 block, n<=3 Layzer, n>=4 optimized to eigen 1
+n     final: 3 Block, n<=3 Layzer, 4<=n<=6 optimized to eigen (1,(1,2),1)
+-----------------------------------------------------------
+3     36404     924    1414        62255    1.676    1.833
+      36404     925    1415        62255    1.676    1.833
+4     36457    2960    2605        59915    1.842    1.837
+      36457    2961    2605        59915    1.842    1.837
+5     36461    2894    2564        59737    1.816    1.831
+      36461    2896    2564        59737    1.816    1.831
+6     36469    2872    2558        59687    1.819    1.830
+      36469    2875    2559        59687    1.819    1.830
+-----------------------------------------------------------
+For each n, upper line is for orbital criterion, lower line for weighted average criterion.
+
+
+The number of CSF
+-----------------------------
+n      0+      0-    1-   2-
+-----------------------------
+3       5       2     5    5 
+4      17      10    26   30
+5      38      26    69   86
+6      70      52   140  184
+-----------------------------
+
+
+
+The number of iteration
+-----------------------------
+n        0+           0-1-2-
+     Orb.  EAV      Orb.  EAV
+-----------------------------
+3    418   143       13    9
+4     18    10       12    8
+5     20    11       15    9
+6     24    12       20   10
+-----------------------------
+
+There exists a tiny difference for intercombination rate. However,the number of iteration decreased about 50%.
+
+Yu

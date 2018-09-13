@@ -1,0 +1,39 @@
+Normal orbital order
+1s,2s,2p,3s,3p,3d,4s,4p,4d,4f  etc
+
+Reversed orbital order
+4f,4d,4p,4s,3d,3p,3s,2p,2s,1s 
+
+When you generate a CSF list using orbitals with  normal order 
+and run jjreduce_breit (jjreduce) you get a reduction of the 
+number of CSFs
+
+When you generate a CSF list using orbitals with reversed order 
+and run jjreduce_breit (jjreduce) you get a reduction of the 
+number of CSFs that is MUCH larger
+
+The CSFs in the two cases spann approximately the same space.
+
+How you use this in practice
+
+a) Run with normal orbital order just as before up to the limit where
+you can not increase the orbital set anymore, say up to n=8
+b) Use jjgen with reversed orbital order and generate CSFs with an additional orbital set, example n = 9
+Run jjreduce_breit (jjreduce) and now you will get less CSFs so that you can run again. NIOTE THAT THE MRLIST
+ALSO NEED TO BE REVERSED
+c) To get initial estimates of the last orbital layer n=9 please use erwfr. Here you will get the question if normal
+or reversed orbital order. Choose reversed orbital order. 
+If you use the new erwfr then the program would
+generate estimates of the new orbital layer n=9 and then it would orthogonalize the new orbitals against the old ones
+n = 1,..,8 and this is correct
+
+
+If you would use the old erwf then the program would
+generate estimates of the new orbital layer n=9 and then it would orthogonalize the inner already known orbitals against 
+the outer layer and this is wrong.
+
+d) Once you have generated the additional orbital layer using rscf and reversed order this could be followed by an
+RCI calculation using normal order. It is not a good idea to do the RCI calculation in reverse order since biotra is not
+working using reversed order. Additionally we dont get the good labels.
+
+

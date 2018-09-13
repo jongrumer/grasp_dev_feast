@@ -1,0 +1,10 @@
+The new routines:
+  *  ldlbl1.f
+  *  ldlbl2.f
+  *  printaLS.f
+
+The updated routines:
+  *  bioscl.f
+  *  oscl.f
+  *  strsum.f
+  *  csfm.f

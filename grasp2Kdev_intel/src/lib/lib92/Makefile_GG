@@ -1,0 +1,36 @@
+LIBDIR = $(GRASP)/lib
+LIBA = $(LIBDIR)/lib92.a
+LIBOBJ = $(OBJ) 
+OBJ = \
+   func.o length.o alloc_$(FC_MALLOC).o dalloc_$(FC_MALLOC).o setmc.o  \
+   alcbuf.o  arctan.o  calen.o   cfp.o     cfp3.o   cfp5.o     cfp7.o   \
+   cfpd.o    cgamma.o  clrx.o    convrt.o  convrt2.o cor.o     cord.o   \
+   count.o cre.o     dcbsrw.o  dpbdt.o   draw.o    engout.o      es.o   \
+   factt.o   fixj.o    getmix.o  getmixa.o getmixc.o getrsl.o getyn.o   \
+   ichop.o   interp.o intrpq.o  iq.o      irow1.o   ispar.o   itjpo.o   \
+   itrig.o   iunpck.o  jcup.o    jqs.o     knj.o ldigit.o    lodcsl.o   \
+   lodiso.o  lodplt.o  lodrwf.o ltab.o    modj23.o  mumdad.o nucpot.o   \
+   ocon.o openfl.o  orthsc.o  outcsf.o  pack.o    parsjl.o   posnfl.o   \
+   prsrcn.o  prsrsl.o  quad.o    radgrd.o ralc2d.o  ralloc.o   rint.o   \
+   rinti.o   rkco.o screen.o  setcon.o  setcsl.o  setcsla.o setcsll.o   \
+   setiso.o  setj.o    setpot.o  setqic.o setqna.o  setrwf.o setrwfa.o  \
+   skrc.o    slater.o speak.o   start.o   timer.o   tnsrjj.o vijout.o   \
+   wghtd5.o  yzk.o daxpyi.o  ddoti.o   dinit.o posfile.o backwdfile.o   \
+   forwdfile.o items.o lodstate.o setcsh.o  lodcsh.o  lodcsh2.o setcsf.o \
+   lodcsf.o spicmv.o chkplt.o cslh.o dmerge.o icopy.o iniest2.o spicmv2.o  \
+   starttime.o stoptime.o ichkq1.o ichkq2.o getmixblka.o getmixblkc.o \
+   lodcslo.o
+
+$(LIBA) : $(LIBOBJ)
+	@echo " Building " $(LIBA)
+#	lorder $(LIBOBJ) | tsort | xargs ar cr $(LIBA) #
+	ar -curvs $(LIBA) $(LIBOBJ)
+	ranlib $(LIBA)
+#	rm -f *.o
+
+.f.o:
+	$(FC) -c $(FC_FLAGS) -I $(GRASP_INCLUDES) $< -o $@ func.o
+
+clean:
+	-rm -f *.o core 
+

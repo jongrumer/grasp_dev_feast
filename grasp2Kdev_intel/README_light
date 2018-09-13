@@ -1,0 +1,31 @@
+
+GRASP2k_light
+Jon Grumer, Lund, 2013-04-16
+
+--------------------------------------------------------------------------------
+This is a light version of grasp2k containing only the newest routines.
+--------------------------------------------------------------------------------
+
+The version number of the codes (eg rci3) has been removed, so binaries
+are now called for example mcp, rscf, rci, and so on. Note that no change
+has been made to the actual source files, just the Makefiles and foldernames.
+
+ADDITIONAL ROUTINES ------------------------------------------------------------
+An EXTRA source-folder, src/extra, contains some extra tools appart from
+the standard grasp-tools. For example routines to reorder or reduce CSF-lists.
+The idea is to put newly developed tools in this folder.
+
+HFSZEEMAN is included in src/appl.
+
+RIS is included in src/appl.
+
+The two additional tools that are part of the RIS-package, 
+RIS_LSJ and RISOSUPPORT,
+are put in src/tools among the other grasp tools.
+
+INSTALLATION ------------------------------------------------------------------
+Installation procedure is as normal
+1) Setup your make_environment_xxxxx file
+2) Source the same file
+3) Do make clean; make; make clean; in src/ (or in each subdir)
+-------------------------------------------------------------------------------

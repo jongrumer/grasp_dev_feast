@@ -1,0 +1,21 @@
+The following statements in the MATCIN 
+**** start ********************************************************************
+        write(*,200) 'Limitations on population of n-subshells? (y/*)'
+         read(*,1000) X
+         lima = X.EQ.'y' .OR. X.EQ.'Y'
+**** end **********************************************************************
+
+were replaced by
+
+**** start ********************************************************************
+c******************* modified by yu zou, 3/6/00
+c this option cannot run correctly. It is not provided at present.
+        go to 80
+        write(*,200) 'Limitations on population of n-subshells? (y/*)'
+         read(*,1000) X
+         lima = X.EQ.'y' .OR. X.EQ.'Y'
+   80    lima=.f.
+c******************* modified by yu zou, 3/6/00
+**** end **********************************************************************
+
+to avoid the use of the option of limitations on population.

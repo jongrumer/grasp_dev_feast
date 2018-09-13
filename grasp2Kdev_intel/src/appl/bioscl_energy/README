@@ -1,0 +1,3 @@
+lodcsl.f removed since it is not in the makefile, and that
+       this file is the same as that in lib92
+

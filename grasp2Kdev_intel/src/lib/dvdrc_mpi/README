@@ -1,0 +1,5 @@
+this dvdson has one parallel routine, msg-norm,
+where the orhtonormal vectors are broadcasted
+form one processorr, rather than each computing it.
+this was a problem on t3e. It is not certain whether
+linux needs this

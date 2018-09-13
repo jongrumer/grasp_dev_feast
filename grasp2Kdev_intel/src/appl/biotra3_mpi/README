@@ -1,0 +1,50 @@
+*********************** By xhh *********************************
+*
+* Obtained from VUPAC
+*   /net/vupac/disk1/users/perj/LATESTGRASP/graspVUnew
+*
+* The only changes made:
+*   .CALL SETCSLA(NAME) -> CALL SETCSLA(NAME,ncore_not_used)
+*   .makefile - the library part, the body is untouched
+*
+****************************************************************
+Observe that the program can not handle
+cases like
+
+1s,2s,3s,3p,3d    -   1s,2p,3s,3p,3d  
+
+but
+
+1s,2s,2p,3s,3d    -   1s,2s,2p,3p,3d
+
+Modifications done to 
+
+kapdata and ti1tv
+
+to allow for
+reversed orbital ordering.
+
+Changes done to 
+
+fname and mcp
+
+to be able to specify which J symmetries that should be
+transformed.
+
+Changes done in
+
+biotr1 
+
+to be able to handle cases like 3s2p1d 3s2p
+
+Changes done in
+
+mcp and qqsort
+
+in order to re-use old angular data
+
+
+
+8/2/00
+
+MPI

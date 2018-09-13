@@ -1,0 +1,104 @@
+.SUFFIXES: .f90 .mod
+
+LIBDIR = $(GRASP)/lib
+BIN = $(GRASP)/bin
+LIB = $(GRASPLIBS)
+BD = $(LIBDIR)/graspBD.o
+UTIL = rmixextract  rcsfblock rwfnmchfmcdf readrwf \
+       rlevels rotate rwfnrotate \
+       ris_lsj risosupport rcsfexcitation HF rwfnplot rcsfsplit renergytable \
+       rtransitiontable rmixreduce
+
+install: EXE 
+	cp rsave $(GRASP)/bin; chmod +x $(GRASP)/bin/rsave
+
+EXE : $(BIN)/rmixextract $(BIN)/rcsfblock  \
+      $(BIN)/rwfnmchfmcdf $(BIN)/readrwf \
+      $(BIN)/rlevels $(BIN)/rotate \
+      $(BIN)/rwfnrotate \
+      $(BIN)/ris_lsj $(BIN)/risosupport \
+      $(BIN)/rcsfexcitation $(BIN)/HF $(BIN)/rwfnplot $(BIN)/rcsfsplit \
+      $(BIN)/renergytable $(BIN)/rtransitiontable $(BIN)/rmixreduce\
+   
+
+OBJ : rmixextract.o rcsfblock.o  rwfnmchfmcdf.o readrwf.o\
+      rlevels.o rotate.o format_mix.o rlevelsj.o \
+      rwfnrotate.o ris_lsj.o risosupport.o rcsfexcitation.o HF.o \
+      rwfnplot.o rcsfsplit.o renergytable.o rtransitiontable.o rmixreduce.o
+      
+
+
+$(BIN)/format_mix  : format_mix.o
+	$(FC) -o $(BIN)/format_mix  $(FC_LD) -L$(LIBDIR) \
+                 format_mix.o $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rmixextract: rmixextract.o
+	$(FC) -o $(BIN)/rmixextract $(FC_LD) -L$(LIBDIR)  rmixextract.o \
+                 $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rcsfblock: rcsfblock.o
+	$(FC) -o $(BIN)/rcsfblock $(FC_LD)  -L$(LIBDIR) rcsfblock.o \
+                 $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rwfnmchfmcdf: rwfnmchfmcdf.o
+	$(FC) -o $(BIN)/rwfnmchfmcdf $(FC_LD) -L$(LIBDIR) rwfnmchfmcdf.o \
+                 $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/readrwf: readrwf.o
+	$(FC) -o $(BIN)/readrwf $(FC_LD) -L$(LIBDIR) readrwf.o $(LIB) \
+                 -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rlevels: rlevels.o
+	$(FC) -o $(BIN)/rlevels $(FC_LD) -L$(LIBDIR) rlevels.o $(LIB) \
+                 -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rlevelsj: rlevelsj.o
+	$(FC) -o $(BIN)/rlevelsj $(FC_LD) -L$(LIBDIR) rlevelsj.o $(LIB) \
+                 -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rotate: rotate.o
+	$(FC) -o $(BIN)/rotate $(FC_LD) -L$(LIBDIR) rotate.o $(BD) $(LIB) \
+                 -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rwfnrotate: rwfnrotate.o
+	$(FC) -o $(BIN)/rwfnrotate  $(FC_LD) -L$(LIBDIR) -I $(GRASP_INCLUDES) \
+                rwfnrotate.o $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/ris_lsj: ris_lsj.o
+	$(FC) -o $(BIN)/ris_lsj  $(FC_LD) -L$(LIBDIR) -I $(GRASP_INCLUDES) \
+                ris_lsj.o $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/risosupport: risosupport.o
+	$(FC) -o $(BIN)/risosupport  $(FC_LD) -L$(LIBDIR) -I $(GRASP_INCLUDES) \
+                risosupport.o $(BD) $(LIB) -L ${LAPACK_DIR} ${LAPACK_LIB}
+
+$(BIN)/rcsfexcitation: rcsfexcitation.o
+	$(FC) -o $(BIN)/rcsfexcitation rcsfexcitation.o 
+
+$(BIN)/HF: HF.o
+	$(FC) -o $(BIN)/HF HF.o 
+
+$(BIN)/rwfnplot: rwfnplot.o
+	$(FC) -o $(BIN)/rwfnplot rwfnplot.o 
+
+$(BIN)/rcsfsplit: rcsfsplit.o
+	$(FC) -o $(BIN)/rcsfsplit rcsfsplit.o 
+
+$(BIN)/renergytable: renergytable.o
+	$(FC) -o $(BIN)/renergytable renergytable.o 
+
+$(BIN)/rtransitiontable: rtransitiontable.o
+	$(FC) -o $(BIN)/rtransitiontable rtransitiontable.o 
+
+$(BIN)/rmixreduce: rmixreduce.o
+	$(FC) -o $(BIN)/rmixreduce rmixreduce.o 
+
+.f.o:
+	$(FC) -c $(FC_FLAGS) -I $(GRASP_INCLUDES) $< -o $@
+
+.f90.o:
+	$(FC) -c $(FC_FLAGS) -I $(GRASP_INCLUDES) $< -o $@
+
+clean:
+	-rm -f *.o core 
+

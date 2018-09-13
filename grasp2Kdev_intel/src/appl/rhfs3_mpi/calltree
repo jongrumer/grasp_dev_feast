@@ -1,0 +1,647 @@
+
+FTNCHEK Version 3.3 November 2004
+
+File chkplt.f:
+
+Warning in module CHKPLT in file chkplt.f: Variables used before set
+    KEYORB used at line 54 file chkplt.f; never set
+    NNN1 used at line 70 file chkplt.f; never set
+    NNNP used at line 62 file chkplt.f; never set
+    NNNW used at line 77 file chkplt.f; never set
+    NNNWP used at line 85 file chkplt.f; never set
+
+ 0 syntax errors detected in file chkplt.f
+ 1 warning issued in file chkplt.f
+
+File gethfdmpi.f:
+
+Warning in module GETHFDMPI in file gethfdmpi.f: Variables declared but never
+ referenced:
+    LENHOST declared at line 51 file gethfdmpi.f
+    NAME declared at line 28 file gethfdmpi.f (dummy argument)
+    NAME_RWF declared at line 31 file gethfdmpi.f
+
+Warning in module GETHFDMPI in file gethfdmpi.f: Variables used before set
+    NNN1 used at line 42 file gethfdmpi.f; never set
+    NNNP used at line 33 file gethfdmpi.f; never set
+    NNNW used at line 45 file gethfdmpi.f; never set
+
+ 0 syntax errors detected in file gethfdmpi.f
+ 2 warnings issued in file gethfdmpi.f
+
+File hfs92mpi.f:
+     71       CHARACTER host*(MPI_MAX_PROCESSOR_NAME), idstring*3
+                              ^
+Error near line 71 col 23 file hfs92mpi.f: constant expression expected
+
+Warning in module HFS92MPI in file hfs92mpi.f: Variables declared but never
+ referenced:
+    INPUTFILEEXISTS declared at line 85 file hfs92mpi.f
+
+Warning in module HFS92MPI in file hfs92mpi.f: Variables set but never used:
+    LENCURRENTDIR set at line 107 file hfs92mpi.f
+
+Warning in module HFS92MPI in file hfs92mpi.f: Variables used before set
+    MPI_MAX_PROCESSOR_NAME used at line 71 file hfs92mpi.f; never set
+
+ 1 syntax error detected in file hfs92mpi.f
+ 3 warnings issued in file hfs92mpi.f
+
+File hfs.f:
+    342      :AFA1*HFC(1,NVEC*(I-1)+II)*2.0023193/2.0D 00
+                                       ^
+Warning near line 342 col 32 file hfs.f: promotion may not give desired
+ precision: dble expr AFA1*HFC(1,NVEC*(I-1)+II .. * real const 2.0023193
+    354      :AFA2*HFC(2,NVEC*(I-1)+II)*2.0023193/2.0D 00
+                                       ^
+Warning near line 354 col 32 file hfs.f: promotion may not give desired
+ precision: dble expr AFA2*HFC(2,NVEC*(I-1)+II .. * real const 2.0023193
+    516       call MPI_Get_processor_name (host, lenhost, ierr)
+Error near line 516 file hfs.f: No path to this statement
+
+Warning in module HFS in file hfs.f: Variables set but never used:
+    ISPARC set at line 142 file hfs.f
+
+Warning in module HFS in file hfs.f: Variables used before set
+    NNNW used at line 33 file hfs.f; never set
+
+ 1 syntax error detected in file hfs.f
+ 4 warnings issued in file hfs.f
+
+File hfs_gg.f:
+    346      :AFA1*HFC(1,NVEC*(I-1)+II)*2.0023193/2.0D 00
+                                       ^
+Warning near line 346 col 32 file hfs_gg.f: promotion may not give desired
+ precision: dble expr AFA1*HFC(1,NVEC*(I-1)+II .. * real const 2.0023193
+    358      :AFA2*HFC(2,NVEC*(I-1)+II)*2.0023193/2.0D 00
+                                       ^
+Warning near line 358 col 32 file hfs_gg.f: promotion may not give desired
+ precision: dble expr AFA2*HFC(2,NVEC*(I-1)+II .. * real const 2.0023193
+    522       call MPI_Get_processor_name (host, lenhost, ierr)
+Error near line 522 file hfs_gg.f: No path to this statement
+
+Warning in module HFS in file hfs_gg.f: Variables set but never used:
+    ISPARC set at line 145 file hfs_gg.f
+
+Warning in module HFS in file hfs_gg.f: Variables used before set
+    NNNW used at line 36 file hfs_gg.f; never set
+
+ 1 syntax error detected in file hfs_gg.f
+ 4 warnings issued in file hfs_gg.f
+
+File lodcsljb.f:
+     32       PARAMETER (NW2 = 2*NNNW)
+                               ^
+Error near line 32 col 24 file lodcsljb.f: constant expression expected
+
+Warning in module LODCSLJB in file lodcsljb.f: Variables set but never used:
+    NPEEL2 set at line 74 file lodcsljb.f
+
+Warning in module LODCSLJB in file lodcsljb.f: Variables may be used before
+ set:
+    NNNW used at line 32 file lodcsljb.f
+    NNNW may be set at line 419 file lodcsljb.f
+    NNNWP used at line 38 file lodcsljb.f
+    NNNWP may be set at line 211 file lodcsljb.f
+
+ 1 syntax error detected in file lodcsljb.f
+ 2 warnings issued in file lodcsljb.f
+
+File lodcslmpijb.f:
+
+Warning in module LODCSLMPIJB in file lodcslmpijb.f: Variables used before set
+    NNNW used at line 52 file lodcslmpijb.f; never set
+    NNNWP used at line 48 file lodcslmpijb.f; never set
+
+ 0 syntax errors detected in file lodcslmpijb.f
+ 1 warning issued in file lodcslmpijb.f
+
+File matelt.f:
+
+Warning in module MATELT in file matelt.f: Variables used before set
+    NNNW used at line 23 file matelt.f; never set
+
+ 0 syntax errors detected in file matelt.f
+ 1 warning issued in file matelt.f
+
+File readmixmpi.f:
+    120                         WRITE (*,'(5I8)') nb, ncfblk, nevblk, iatjp, iaspa
+                                                                                ^
+Possibly misleading appearance near line 120 col 73 file readmixmpi.f: 
+ characters past 72 columns
+
+Warning in module READMIXMPI in file readmixmpi.f: Variables set but never
+ used:
+    NVECSIZ set at line 70 file readmixmpi.f
+
+Warning in module READMIXMPI in file readmixmpi.f: Variables used before set
+    IAS used at line 120 file readmixmpi.f; never set
+
+ 0 syntax errors detected in file readmixmpi.f
+ 3 warnings issued in file readmixmpi.f
+
+File rinthf.f:
+
+Warning in module RINTHF at line 39 file rinthf.f: Function modifies common
+ variable MTP
+
+Warning in module RINTHF at line 43 file rinthf.f: Function modifies common
+ variable TA
+
+Warning in module RINTHF in file rinthf.f: Variables used before set
+    NNN1 used at line 33 file rinthf.f; never set
+    NNNP used at line 31 file rinthf.f; never set
+    NNNW used at line 35 file rinthf.f; never set
+
+ 0 syntax errors detected in file rinthf.f
+ 3 warnings issued in file rinthf.f
+
+File setcslajb.f:
+
+Warning in module SETCSLAJB in file setcslajb.f: Variables declared but never
+ referenced:
+    DEFNAM declared at line 18 file setcslajb.f
+    FOUND declared at line 14 file setcslajb.f
+
+ 0 syntax errors detected in file setcslajb.f
+ 1 warning issued in file setcslajb.f
+
+File setdbg.f:
+ 0 syntax errors detected in file setdbg.f
+File setNCFjb.f:
+
+Warning in module SETNCF in file setNCFjb.f: Variables set but never used:
+    CSF2 set at line 35 file setNCFjb.f
+    CSF3 set at line 36 file setNCFjb.f
+    STRING set at line 26 file setNCFjb.f
+
+ 0 syntax errors detected in file setNCFjb.f
+ 1 warning issued in file setNCFjb.f
+
+File setsum.f:
+
+Warning in module SETSUM in file setsum.f: Variables declared but never
+ referenced:
+    DEFNAM declared at line 16 file setsum.f
+
+ 0 syntax errors detected in file setsum.f
+ 1 warning issued in file setsum.f
+
+File strsum.f:
+
+Warning in module STRSUM in file strsum.f: Variables declared but never
+ referenced:
+    CDATA declared at line 27 file strsum.f
+
+Warning in module STRSUM in file strsum.f: Variables used before set
+    NNN1 used at line 42 file strsum.f; never set
+    NNNP used at line 33 file strsum.f; never set
+    NNNW used at line 46 file strsum.f; never set
+
+ 0 syntax errors detected in file strsum.f
+ 2 warnings issued in file strsum.f
+
+Tree of subprogram calls:
+HFS92MPI
+    CHKPLT
+        CONVRT
+        LODPLT
+    FACTT
+    GETHFDMPI
+        GETYN
+        MPI_BCAST
+        NUCPOT
+        RADGRD
+        SETQIC
+    GETYN
+    HFS
+        ALLOC
+        CONVRT
+        DALLOC
+        DATE_AND_TIME
+        DRACAH
+        GRACAH1
+        ISPAR
+        ITJPO
+        LEN_TRIM
+        MATELT
+            CLRX
+        MPI_ALLREDUCE
+        MPI_GET_PROCESSOR_NAME
+        ONEPARTICLEJJ
+        RINT
+        RINTHF
+            QUAD
+        TNSRJJ
+    LEN_TRIM
+    LODCSLMPIJB
+        ALLOC
+        MPIX_BYTES
+        MPI_BARRIER
+        MPI_BCAST
+        SETCSLAJB
+            LODCSLJB
+                ALLOC
+                CONVRT
+                IQ
+                ISPAR
+                ITJPO
+                JCUP
+                JQS
+                LEN_TRIM
+                PACK
+                PARSJL
+                PRSRCN
+                PRSRSL
+                RALC2D
+            OPENFL
+            SETNCF
+    READMIXMPI
+        ALLOC
+        MPI_BCAST
+    SETCON
+    SETDBG
+        GETYN
+        LEN_TRIM
+        OPENFL
+    SETISOMPI
+    SETMC
+    SETRWFMPI
+    SETSUM
+        OPENFL
+    STARTMPI2
+    STOPMPI2
+    STRSUM
+        CALEN
+        CONVRT
+        ENGOUT
+        WGHTD5
+    SYS_CHDIR
+    SYS_GETWD
+
+Warning: Common block LIB92P Elements used but never set:
+    LPLANT
+
+Warning: Common block DECIDE Elements never used, never set:
+    LTRANS LVP LSE LNMS LSMS
+
+Warning: Common block DEF1 unused in the following modules:
+    Unused in module HFS line 47 file hfs_gg.f
+    Unused in module HFS line 44 file hfs.f
+
+Warning: Common block DEF1 Elements used but never set:
+    Z
+
+Warning: Common block DEF1 Elements never used, never set:
+    EMN IONCTY
+
+Warning: Common block DEF4 Elements set but never used:
+    ACCY
+
+Warning: Common block DEF4 Elements never used, never set:
+    NSCF NSIC NSOLV
+
+Warning: Common block DEF9 Elements used but never set:
+    CVAC
+
+Warning: Common block DEF9 Elements never used, never set:
+    PI
+
+Warning: Common block GRID Elements used but never set:
+    R RP
+
+Warning: Common block GRID Elements never used, never set:
+    RPOR
+
+Warning: Common block NPAR Elements used but never set: all
+
+Warning: Common block NPOT unused in the following modules:
+    Unused in module GETHFDMPI line 44 file gethfdmpi.f
+
+Warning: Common block NPOT Elements never used, never set:
+    ZZ
+
+Warning: Common block ORB1 unused in the following modules:
+    Unused in module GETHFDMPI line 45 file gethfdmpi.f
+
+Warning: Common block ORB1 Elements used but never set: all
+
+Warning: Common block ORB2 unused in the following modules:
+    Unused in module GETHFDMPI line 46 file gethfdmpi.f
+
+Warning: Common block WAVE unused in the following modules:
+    Unused in module GETHFDMPI line 47 file gethfdmpi.f
+
+Warning: Common block WAVE Elements used but never set:
+    PZ MF
+
+Warning: Common block WAVE Elements never used, never set:
+    PNTRPF PNTRQF
+
+Warning: Common block WFAC unused anywhere
+
+Warning: Common block IOUNIT Elements used but never set:
+    ISTDE
+
+Warning: Common block IOUNIT Elements never used, never set:
+    ISTDI ISTDO
+
+Warning: Common block DEF3 Elements used but never set: all
+
+Warning: Common block DEF10 Elements used but never set:
+    AUCM CCMS
+
+Warning: Common block DEF10 Elements never used, never set:
+    AUEV FASI FBSI
+
+Warning: Common block DEF11 Elements used but never set:
+    B1
+
+Warning: Common block DEF11 Elements never used, never set:
+    FMTOAU
+
+Warning: Common block EIGVAL unused in the following modules:
+    Unused in module HFS line 52 file hfs_gg.f
+    Unused in module HFS line 49 file hfs.f
+
+Warning: Common block EIGVEC unused in the following modules:
+    Unused in module STRSUM line 40 file strsum.f
+    Unused in module HFS line 53 file hfs_gg.f
+    Unused in module HFS line 50 file hfs.f
+
+Warning: Common block JLABL Elements used but never set:
+    LABJ LABP
+
+Warning: Common block JLABL Elements never used, never set:
+    JLBL
+
+Warning: Common block NSMDAT Elements used but never set: all
+
+Warning: Common block PRNT Elements never used, never set:
+    NVECMX
+
+Warning: Common block SYMA unused in the following modules:
+    Unused in module STRSUM line 51 file strsum.f
+    Unused in module HFS line 58 file hfs_gg.f
+    Unused in module HFS line 55 file hfs.f
+
+Warning: Common block OPT6 unused anywhere
+
+Warning: Common block TERMS Elements used but never set:
+    JTAB NTAB
+
+Warning: Common block TERMS Elements never used, never set:
+    NROWS ITAB
+
+Warning: Common block TATB Elements set but never used:
+    TA
+
+Warning: Common block TATB Elements never used, never set:
+    TB
+
+Warning: Common block DEBUGG Elements set but never used: all
+
+Warning: Common block DEBUGR Elements set but never used: all
+
+Warning: Common block DEF1 data type mismatch at position 1:
+    Variable EMN in module GETHFDMPI line 36 file gethfdmpi.f is type dble
+    Variable EMN in module LODCSLJB line 43 file lodcsljb.f is type real*8
+  and at position 4:
+    Variable Z in module GETHFDMPI line 36 file gethfdmpi.f is type dble
+    Variable Z in module LODCSLJB line 43 file lodcsljb.f is type real*8
+
+Warning: Common block ORB2 data type mismatch at position 3:
+    Variable PNTRIQ in module GETHFDMPI line 46 file gethfdmpi.f is type 
+ intg*4
+    Variable PNTRIQ in module SETNCF line 21 file setNCFjb.f is type real*8
+
+Warning: Subprogram LODPLT never defined
+    Invoked in module CHKPLT line 37 file chkplt.f
+
+Warning: Subprogram CONVRT never defined
+    Invoked in module CHKPLT line 100 file chkplt.f
+
+Warning: Subprogram GETYN never defined
+    Invoked in module GETHFDMPI line 120 file gethfdmpi.f
+
+Warning: Subprogram MPI_BCAST never defined
+    Invoked in module GETHFDMPI line 144 file gethfdmpi.f
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NVECTOT in module READMIXMPI line 80 file readmixmpi.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg IVEC in module READMIXMPI line 183 file readmixmpi.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg IATJPO in module READMIXMPI line 184 file readmixmpi.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg IASPAR in module READMIXMPI line 185 file readmixmpi.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NCF in module LODCSLMPIJB line 70 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NW in module LODCSLMPIJB line 71 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NP in module LODCSLMPIJB line 73 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NAK in module LODCSLMPIJB line 74 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NKL in module LODCSLMPIJB line 75 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NKJ in module LODCSLMPIJB line 76 file lodcslmpijb.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg NH in module LODCSLMPIJB line 77 file lodcslmpijb.f is type 
+ char*2
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg IQA in module LODCSLMPIJB line 92 file lodcslmpijb.f is type 
+ intg*4
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg JQSA in module LODCSLMPIJB line 93 file lodcslmpijb.f is type 
+ intg*4
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg JCUPA in module LODCSLMPIJB line 94 file lodcslmpijb.f is type 
+ intg*4
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg LFORDR in module GETHFDMPI line 137 file gethfdmpi.f is type 
+ logl
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg ICCUT in module GETHFDMPI line 138 file gethfdmpi.f is type 
+ intg
+
+Warning: Subprogram MPI_BCAST argument data type mismatch at position 1:
+    Actual arg HP in module GETHFDMPI line 144 file gethfdmpi.f is type dble
+    Actual arg N in module GETHFDMPI line 143 file gethfdmpi.f is type intg
+
+Warning: Subprogram SETQIC never defined
+    Invoked in module GETHFDMPI line 154 file gethfdmpi.f
+
+Warning: Subprogram RADGRD never defined
+    Invoked in module GETHFDMPI line 158 file gethfdmpi.f
+
+Warning: Subprogram NUCPOT never defined
+    Invoked in module GETHFDMPI line 162 file gethfdmpi.f
+
+Warning: Subprogram STARTMPI2 never defined
+    Invoked in module HFS92MPI line 91 file hfs92mpi.f
+
+Warning: Subprogram LEN_TRIM never defined
+    Invoked in module HFS92MPI line 213 file hfs92mpi.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram SYS_GETWD never defined
+    Invoked in module HFS92MPI line 106 file hfs92mpi.f
+
+Warning: Subprogram SYS_CHDIR never defined
+    Invoked in module HFS92MPI line 242 file hfs92mpi.f
+
+Warning: Subprogram SETMC never defined
+    Invoked in module HFS92MPI line 175 file hfs92mpi.f
+
+Warning: Subprogram SETCON never defined
+    Invoked in module HFS92MPI line 179 file hfs92mpi.f
+
+Warning: Subprogram SETISOMPI never defined
+    Invoked in module HFS92MPI line 199 file hfs92mpi.f
+
+Warning: Subprogram SETRWFMPI never defined
+    Invoked in module HFS92MPI line 218 file hfs92mpi.f
+
+Warning: Subprogram FACTT never defined
+    Invoked in module HFS92MPI line 238 file hfs92mpi.f
+
+Warning: Subprogram HFS multiply defined
+    Defined in module HFS line 3 file hfs_gg.f
+    Defined in module HFS line 3 file hfs.f
+
+Warning: Subprogram STOPMPI2 never defined
+    Invoked in module HFS92MPI line 257 file hfs92mpi.f
+
+Warning: Subprogram ALLOC never defined
+    Invoked in module HFS line 84 file hfs.f
+
+Warning: Subprogram RINT never defined
+    Invoked in module HFS line 104 file hfs.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram ISPAR never defined
+    Invoked in module HFS line 142 file hfs.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram ITJPO never defined
+    Invoked in module HFS line 144 file hfs.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram TNSRJJ never defined
+    Invoked in module HFS line 168 file hfs.f
+
+Warning: Subprogram MPI_ALLREDUCE never defined
+    Invoked in module HFS line 242 file hfs.f
+
+Warning: Subprogram DATE_AND_TIME never defined
+    Invoked in module HFS line 517 file hfs.f
+
+Warning: Subprogram DRACAH never defined
+    Invoked in module HFS line 430 file hfs.f
+
+Warning: Subprogram DALLOC never defined
+    Invoked in module HFS line 492 file hfs.f
+
+Warning: Subprogram MPI_GET_PROCESSOR_NAME never defined
+    Invoked in module HFS line 516 file hfs.f
+
+Warning: Subprogram ONEPARTICLEJJ never defined
+    Invoked in module HFS line 171 file hfs_gg.f
+
+Warning: Subprogram GRACAH1 never defined
+    Invoked in module HFS line 436 file hfs_gg.f
+
+Warning: Subprogram PRSRSL never defined
+    Invoked in module LODCSLJB line 72 file lodcsljb.f
+
+Warning: Subprogram PRSRCN never defined
+    Invoked in module LODCSLJB line 177 file lodcsljb.f
+
+Warning: Subprogram PARSJL never defined
+    Invoked in module LODCSLJB line 251 file lodcsljb.f
+
+Warning: Subprogram RALC2D never defined
+    Invoked in module LODCSLJB line 215 file lodcsljb.f
+
+Warning: Subprogram PACK never defined
+    Invoked in module LODCSLJB line 501 file lodcsljb.f
+
+Warning: Subprogram IQ never defined
+    Invoked in module LODCSLJB line 531 file lodcsljb.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram JQS never defined
+    Invoked in module LODCSLJB line 534 file lodcsljb.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram JCUP never defined
+    Invoked in module LODCSLJB line 535 file lodcsljb.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram MPI_BARRIER never defined
+    Invoked in module LODCSLMPIJB line 68 file lodcslmpijb.f
+
+Warning: Subprogram MPIX_BYTES never defined
+    Invoked in module LODCSLMPIJB line 88 file lodcslmpijb.f
+
+Warning: Subprogram CLRX never defined
+    Invoked in module MATELT line 79 file matelt.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram QUAD never defined
+    Invoked in module RINTHF line 50 file rinthf.f
+
+Warning: Subprogram OPENFL never defined
+    Invoked in module SETCSLAJB line 30 file setcslajb.f
+
+Warning: Subprogram CALEN never defined
+    Invoked in module STRSUM line 57 file strsum.f
+
+Warning: Subprogram ENGOUT never defined
+    Invoked in module STRSUM line 139 file strsum.f
+
+Warning: Subprogram WGHTD5 never defined
+    Invoked in module STRSUM line 140 file strsum.f

@@ -1,0 +1,23 @@
+#
+LIBDIR  = ${GRASPLIB}
+BINDIR  = ${GRASPBIN}
+BINDIR = ../../../bin
+BINFILE = $(BINDIR)/csl
+FC      = ${GRASPFOR}
+FFLAGS  = ${GRASPOPT}
+
+LIBS    = $(LIBDIR)/lib92.a 
+
+BLOCK_DATA = ${GRASPBLOCKD} 
+
+OBJECTS= couple.o decnsl.o decrsl.o dstbut.o gencsl.o \
+         gennrl.o genrl.o getsqn.o parsjl.o prntcn.o \
+         prntpj.o prsncn.o prsnsl.o prsrcn.o prsrsl.o \
+         wrtcsf.o
+
+$(BINFILE) : $(OBJECTS) $(BLOCK_DATA) $(LIBS)
+	$(FC) -o $(BINFILE) $(LFLAGS) $(FFLAGS) $(OBJECTS) $(BLOCK_DATA) $(LIBS)
+
+.f.o : 
+	$(FC) -c $(FFLAGS) $*.f
+
